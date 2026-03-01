@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bloom by Poly | Catálogo Profissional</title>
+  <style>
+    :root { --ouro: #b8926a; --bege: #fdfaf8; --dark: #333; }
+    body { font-family: 'Georgia', serif; line-height: 1.6; color: var(--dark); background-color: var(--bege); margin: 0; }
+
+    /* --- HEADER & SOBRE NÓS --- */
+    header { text-align: center; padding: 60px 20px; background: #fff; border-bottom: 1px solid #b8a5a5; }
+    header h1 { font-size: 3.5rem; margin: 0; letter-spacing: 6px; font-weight: 300; text-transform: uppercase; }
+    header p.sub { margin: 0; color: #888; letter-spacing: 3px; }
+
+    .sobre { max-width: 800px; margin: 40px auto 0; padding: 0 20px; text-align: center; }
+    .sobre h4 { color: var(--ouro); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; font-size: 0.9rem; }
+    .sobre p { font-size: 1.1rem; color: #555; line-height: 1.8; }
+    .aviso-ilustrativo { margin-top: 20px; font-style: italic; color: #888; font-size: 0.9rem; }
+
+    /* --- VITRINE --- */
+    .catalogo { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; padding: 40px; max-width: 1200px; margin: 0 auto; }
+    .card { background: #fff; border-radius: 25px; padding: 20px; text-align: center; cursor: pointer; transition: 0.4s; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+    .card:hover { transform: translateY(-8px); box-shadow: 0 12px 30px rgba(184, 146, 106, 0.2); }
+    .card img { width: 100%; height: 280px; object-fit: cover; border-radius: 20px; background: #eee; }
+    .card h3 { font-size: 1.2rem; margin: 20px 0 5px; font-weight: 400; }
+    .card .preco-vitrine { color: var(--ouro); font-weight: bold; font-size: 1.1rem; }
+
+    /* --- MODAL (RESPONSIVO) --- */
+    .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); overflow-y: auto; }
+    .modal-content { background: #fff; margin: 2% auto; width: 95%; max-width: 1100px; border-radius: 35px; display: flex; flex-wrap: nowrap; position: relative; overflow: hidden; animation: slideUp 0.4s ease; max-height: 90vh; }
+    @keyframes slideUp { from {transform: translateY(50px); opacity: 0;} to {transform: translateY(0); opacity: 1;} }
+
+    .close { position: absolute; right: 20px; top: 20px; font-size: 30px; cursor: pointer; z-index: 3000; color: #333; background: rgba(255,255,255,0.9); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+
+    .modal-left { flex: 1.2; background: #f4f4f4; position: relative; height: auto; min-height: 500px; overflow: hidden; }
+    .modal-gallery { display: flex; width: 100%; height: 100%; transition: transform 0.5s ease; }
+    .modal-gallery img { width: 100%; min-width: 100%; height: 100%; object-fit: cover; flex-shrink: 0; background: #f4f4f4; }
+
+    .modal-nav { position: absolute; top: 50%; width: 100%; display: flex; justify-content: space-between; padding: 0 15px; box-sizing: border-box; transform: translateY(-50%); z-index: 50; }
+    .m-btn { background: rgba(255,255,255,0.9); border: none; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; font-size: 20px; color: var(--ouro); box-shadow: 0 2px 10px rgba(0,0,0,0.2); }
+
+    .modal-right { flex: 1; padding: 40px; display: flex; flex-direction: column; background: #fff; overflow-y: auto; }
+    .modal-right h2 { font-size: 1.8rem; margin: 0 0 15px; color: var(--dark); }
+    .modal-right p { font-size: 1rem; color: #666; margin-bottom: 10px; line-height: 1.5; }
+    .modal-right .m-nota { font-size: 0.85rem; color: #888; font-style: italic; margin-bottom: 20px; display: block; border-left: 2px solid var(--ouro); padding-left: 10px; }
+    .ref-tag { font-size: 0.75rem; background: #f0f0f0; padding: 5px 10px; border-radius: 6px; color: #555; display: inline-block; margin-bottom: 20px; font-weight: bold; align-self: flex-start; }
+
+    .select-modal { width: 100%; padding: 12px; border-radius: 12px; border: 1.5px solid #eee; margin-bottom: 15px; font-family: inherit; font-size: 0.95rem; cursor: pointer; }
+    .btn-wpp { background: var(--dark); color: #fff; text-decoration: none; padding: 18px; text-align: center; border-radius: 60px; font-weight: bold; transition: 0.3s; font-size: 0.95rem; margin-top: auto; }
+
+    .sub-opcoes-label { font-size: 0.75rem; font-weight: bold; color: var(--ouro); display: block; margin-bottom: 5px; text-transform: uppercase; }
+
+    .nota-geral { max-width: 800px; margin: 40px auto 0; padding: 30px; text-align: center; background: #fff; border-radius: 20px; border: 1px solid #eee; }
+    .nota-geral h4 { color: var(--ouro); margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; }
+
+    footer { text-align: center; padding: 60px 20px; background: #fff; border-top: 1px solid #eee; margin-top: 20px; }
+
+    @media (max-width: 850px) {
+      .modal-content { flex-direction: column; margin: 0; border-radius: 0; width: 100%; height: 100%; max-height: 100vh; overflow-y: auto; }
+      .modal-left { flex: none; height: 40vh; min-height: 300px; width: 100%; }
+      .modal-right { padding: 25px 20px; overflow-y: visible; flex: none; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Bloom</h1>
+  <p class="sub">by Poly</p>
+  <section class="sobre">
+    <h4>Sobre nós</h4>
+    <p>Bloom by Poly nasce da vontade de transformar espaços através da estética: composições que elevam o ambiente e criam presença. As nossas velas são pensadas como peças decorativas, criadas artesanalmente, onde a forma, a textura e a harmonia visual têm o papel principal.</p>
+    <p class="aviso-ilustrativo">NOTA: As imagens apresentadas para os nossos produtos são meramente ilustrativas.</p>
+  </section>
+</header>
+
+<main class="catalogo" id="vitrine"></main>
+
+<div id="productModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <div class="modal-left">
+      <div class="modal-nav" id="nav-buttons">
+        <button class="m-btn" onclick="changeM(-1)">&#10094;</button>
+        <button class="m-btn" onclick="changeM(1)">&#10095;</button>
+      </div>
+      <div id="modalGallery" class="modal-gallery"></div>
+    </div>
+    <div class="modal-right">
+      <h2 id="m-titulo"></h2>
+      <p id="m-desc"></p>
+      <span id="m-nota" class="m-nota"></span>
+
+      <div id="m-opcoes-cont">
+        <label style="font-size: 0.75rem; font-weight: bold; color: var(--ouro); display: block; margin-bottom: 5px;">OPÇÃO:</label>
+        <select id="m-select" class="select-modal" onchange="syncModal()"></select>
+      </div>
+
+      <div id="m-sub-opcoes-cont" style="display: none;">
+        <label id="m-sub-label" class="sub-opcoes-label"></label>
+        <select id="m-sub-select" class="select-modal" onchange="syncModal()"></select>
+      </div>
+
+      <div id="m-ref" class="ref-tag"></div>
+      <div id="m-preco" style="font-size: 1.6rem; color: var(--ouro); margin-bottom: 20px; font-weight: bold;"></div>
+      <a id="m-link" href="#" target="_blank" class="btn-wpp">ENCOMENDAR VIA WHATSAPP</a>
+    </div>
+  </div>
+</div>
+
+<section class="nota-geral">
+  <h4>Notas importantes antes de encomendar:</h4>
+  <p>Poderá escolher, para todos os produtos, a combinação de cores e essências, limitado ao stock existente. Mais informações, contacte-nos através dos meios indicados abaixo:</p>
+</section>
+
+<footer>
+  <h4>Contacte-nos</h4>
+  <p><strong><a href="https://wa.me/351963404327" style="text-decoration:none; color:inherit;">WhatsApp</a></strong> | Email: <strong>poly.bloom27@gmail.com</strong></p>
+  <a href="https://www.instagram.com/poly.bloom27" target="_blank" style="text-decoration:none; color:var(--dark); font-weight:bold;">Siga-nos no Instagram: @poly.bloom27</a>
+</footer>
+
+<script>
+  const notaGeralVelas = "NOTA: Para queimar, deve retirar as velas e colocar em recipiente próprio.";
+
+  const produtos = [
+    { id: 0, titulo: "Bouquet em caixa de Madeira", preco: "15,50€", ref: "BOUQ-MAD-01", desc: "Uma curadoria onde o charme rústico da madeira natural se funde com a elegância do design contemporâneo. Esta peça artesanal foi concebida para transformar espaços, criando momentos de serenidade através de detalhes decorativos exclusivos.", nota: notaGeralVelas, fotos: ["Fotos/1_CaixaMadeira.jpg"], opcoes: [] },
+    { id: 1, titulo: "Bouquet em Caixa de Cartão", preco: "Vários Preços", ref: "BOUQ-CART-MED", desc: "Uma composição onde o design contemporâneo das linhas modernas encontra a delicadeza da nossa arte floral. Estruturado em cartão de acabamento superior, este bouquet equilibra suavidade e distinção numa peça decorativa única.", nota: notaGeralVelas, fotos: ["Fotos/2_CaixaCartao.jpg", "Fotos/10_CaixaCartaoCorrente.jpg", "Fotos/13_CaixaCartaoPeq.jpg"], opcoes: [
+        { nome: "Selecionar", ref: "", preco: "14,50€ - 19,90€", fotoIdx: 0 },
+        { nome: "Médio", ref: "BOUQ-CART-MED", preco: "19,90€", subTitulo: "Tipo de caixa pretendido", subOpcoes: [
+            { nome: "Caixa redonda", ref: "BOUQ-CART-RED", preco: "19,90€", fotoIdx: 0 },
+            { nome: "Caixa retangular com correntes douradas", ref: "BOUQ-CART-COR", preco: "19,90€", fotoIdx: 1 }
+          ]},
+        { nome: "Pequeno", ref: "BOUQ-CART-PEQ", preco: "14,50€", subTitulo: "Cor pretendida", subOpcoes: [
+            { nome: "Cor de rosa", ref: "BOUQ-CART-PEQ-PK", preco: "14,50€", fotoIdx: 2 },
+            { nome: "Branco", ref: "BOUQ-CART-PEQ-WT", preco: "14,50€", fotoIdx: 2 }
+          ]}
+      ]},
+    { id: 2, titulo: "Bouquet em Jarra", preco: "Vários Preços", ref: "BOUQ-JAR-NORM", desc: "Elegância e delicadeza em jarra de vidro. Descubra as jarras personalizadas,um encontro entre duas artes: as nossas velas artesanais ganham uma nova dimensão em jarras exclusivas de design assinado por Luís Chaves, disponíveis para compra com o seu bouquet.", nota: notaGeralVelas, fotos: ["Fotos/3_ArranjoJarra.jpg", "Fotos/9_JarraPers_II.jpg", "Fotos/8_JarraPersonalizada.jpg"], opcoes: [
+        { nome: "Selecionar", ref: "", preco: "7,00€ - 15,00€", fotoIdx: 0 },
+        { nome: "Normal", ref: "BOUQ-JAR-NORM", preco: "7,00€", fotoIdx: 0 },
+        { nome: "Personalizada", ref: "BOUQ-JAR-PERS", preco: "15,00€", fotoIdx: 1 }
+      ]},
+    { id: 3, titulo: "Bouquet Miniatura", preco: "4,50€", ref: "MINI-VASO-MET", desc: "A prova de que a elegância prescinde de grandes dimensões para criar impacto. Uma curadoria de pormenores pensada para conferir pontos de luz e harmonia a espaços mais íntimos.", nota: notaGeralVelas, fotos: ["Fotos/4_MiniVasosMetal.jpg", "Fotos/12_MiniaturaCesto.jpg", "Fotos/11_Miniaturas.jpg"], opcoes: [
+        { nome: "Selecionar", ref: "", preco: "4,50€", fotoIdx: 0 },
+        { nome: "Vaso Metálico", ref: "MINI-VASO-MET", preco: "4,50€", fotoIdx: 0 },
+        { nome: "Cesto Artesanal", ref: "MINI-CESTO-ART", preco: "4,50€", fotoIdx: 1 }
+      ]},
+    { id: 4, titulo: "Vela em Taça Cerâmica", preco: "9,90€", ref: "VELA-TACA-CER", desc: "Onde o calor da cera encontra a alma da terra numa fusão perfeita. Um convite à serenidade que traz uma estética orgânica e sofisticada a qualquer espaço da sua casa.", nota: "NOTA: Para queimar, deverá retirar as flores secas, podendo acender a vela no mesmo recipiente.", fotos: ["Fotos/5_TacaCeramica.jpg"], opcoes: [] },
+    { id: 5, titulo: "Ramos de Flores", preco: "6,50€", ref: "RAMO-FLOR-IND", desc: "Pequenas esculturas de luz que elevam a delicadeza floral a um novo patamar. Este ramo de três flores é o detalhe perfeito para pontuar a sua decoração ou para um gesto de carinho inesquecível.", nota: notaGeralVelas, fotos: ["Fotos/6_FloresRamo.jpg"], opcoes: [] },
+    { id: 6, titulo: "Velas Individuais", preco: "4,50€", ref: "VELA-IND-PERS", desc: "A essência da Bloom capturada numa peça de design artesanal que combina a pureza das formas com a delicadeza floral. Um detalhe de luz e sofisticação, ideal tanto para elevar a sua decoração como para um gesto de partilha único.", nota: notaGeralVelas, fotos: ["Fotos/14_VelasInd_II.jpg", "Fotos/7_VelasInd.jpg"], opcoes: [] }
+  ];
+
+  let curProd = null; let curImgIdx = 0;
+  const vitrine = document.getElementById('vitrine');
+  produtos.forEach(p => {
+    const card = document.createElement('div'); card.className = 'card'; card.onclick = () => openModal(p.id);
+    card.innerHTML = `<img src="${p.fotos[0]}" onerror="handleImageError(this)"><h3>${p.titulo}</h3><p class="preco-vitrine">${p.preco}</p>`;
+    vitrine.appendChild(card);
+  });
+
+  function handleImageError(img) {
+    const originalSrc = img.src;
+    if (originalSrc.includes('.jpg')) {
+      img.src = originalSrc.replace('.jpg', '.JPG');
+    } else if (originalSrc.includes('.JPG')) {
+      img.src = 'https://placehold.co/600x600?text=Imagem+Nao+Encontrada';
+    } else {
+      img.src = 'https://placehold.co/600x600?text=Erro+de+Ficheiro';
+    }
+  }
+
+  function openModal(id) {
+    curProd = produtos[id]; curImgIdx = 0;
+    document.getElementById('m-titulo').innerText = curProd.titulo;
+    document.getElementById('m-desc').innerText = curProd.desc;
+    document.getElementById('m-nota').innerText = curProd.nota;
+    document.getElementById('m-preco').innerText = curProd.preco;
+    const gal = document.getElementById('modalGallery');
+    gal.innerHTML = curProd.fotos.map(f => `<img src="${f}" onerror="handleImageError(this)">`).join('');
+    document.getElementById('nav-buttons').style.display = curProd.fotos.length > 1 ? 'flex' : 'none';
+    const sel = document.getElementById('m-select');
+    document.getElementById('m-sub-opcoes-cont').style.display = 'none';
+    if(curProd.opcoes.length > 0) {
+      document.getElementById('m-opcoes-cont').style.display = 'block';
+      sel.innerHTML = curProd.opcoes.map((o, i) => `<option value="${i}">${o.nome}</option>`).join('');
+    } else { document.getElementById('m-opcoes-cont').style.display = 'none'; }
+    syncModal(true);
+    document.getElementById('productModal').style.display = 'block';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function syncModal(isNew = false) {
+    const sel = document.getElementById('m-select');
+    const subSelCont = document.getElementById('m-sub-opcoes-cont');
+    const subSel = document.getElementById('m-sub-select');
+    let ref = curProd.ref; let nome = curProd.titulo; let preco = curProd.preco; let textoWpp = "";
+
+    if(curProd.opcoes.length > 0) {
+      const opt = curProd.opcoes[sel.value];
+      preco = opt.preco;
+      if(opt.subOpcoes) {
+        subSelCont.style.display = 'block';
+        document.getElementById('m-sub-label').innerText = opt.subTitulo;
+        if(isNew || subSel.dataset.p !== sel.value) {
+          subSel.innerHTML = opt.subOpcoes.map((so, i) => `<option value="${i}">${so.nome}</option>`).join('');
+          subSel.dataset.p = sel.value;
+        }
+        const subOpt = opt.subOpcoes[subSel.value];
+        ref = subOpt.ref; preco = subOpt.preco; nome += ` - ${opt.nome} (${subOpt.nome})`; curImgIdx = subOpt.fotoIdx;
+      } else {
+        subSelCont.style.display = 'none';
+        if(opt.nome === "Selecionar") { ref = "---"; textoWpp = `Olá! Gostaria de mais informações sobre: ${nome}`; curImgIdx = opt.fotoIdx; }
+        else { ref = opt.ref; nome += ` (${opt.nome})`; curImgIdx = opt.fotoIdx; }
+      }
+    }
+    updateGallery();
+    document.getElementById('m-preco').innerText = preco;
+    if(!textoWpp) textoWpp = `Olá! Gostaria de encomendar o produto: ${nome} [Ref: ${ref}]`;
+    document.getElementById('m-ref').innerText = `Ref: ${ref}`;
+    document.getElementById('m-link').href = `https://wa.me/351963404327?text=${encodeURIComponent(textoWpp)}`;
+  }
+
+  function updateGallery() { document.getElementById('modalGallery').style.transform = `translateX(-${curImgIdx * 100}%)`; }
+  function changeM(dir) { curImgIdx = (curImgIdx + dir + curProd.fotos.length) % curProd.fotos.length; updateGallery(); }
+  function closeModal() { document.getElementById('productModal').style.display = 'none'; document.body.style.overflow = 'auto'; }
+</script>
+</body>
+</html>
