@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bloom by Poly | Catálogo Profissional</title>
+  <title>Bloom by Poly | Site</title>
   <style>
     /* DEFINIÇÃO DE CORES HARMONIZADAS - ORIGINAIS */
     :root {
@@ -35,24 +35,24 @@
     }
 
     .nav-logo { max-height: 60px; cursor: pointer; }
-    
+
     .nav-links { display: flex; gap: 25px; align-items: center; }
-    .nav-links a { 
-        text-decoration: none; 
-        color: var(--dark); 
-        font-weight: bold; 
-        text-transform: uppercase; 
-        font-size: 0.85rem; 
-        letter-spacing: 1px;
-        cursor: pointer;
+    .nav-links a {
+      text-decoration: none;
+      color: var(--dark);
+      font-weight: bold;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      cursor: pointer;
     }
     .nav-links a:hover { color: var(--ouro); }
-    
+
     .btn-carrinho {
-        background: var(--ouro);
-        color: white !important;
-        padding: 8px 15px;
-        border-radius: 20px;
+      background: var(--ouro);
+      color: white !important;
+      padding: 8px 15px;
+      border-radius: 20px;
     }
 
     /* --- SECÇÕES --- */
@@ -62,14 +62,14 @@
     /* --- PÁGINA INÍCIO --- */
     .hero-inicio { max-width: 900px; margin: 40px auto; text-align: center; padding: 0 20px; }
     .hero-inicio h1 { color: var(--ouro); font-weight: normal; }
-    
+
     .preview-produtos { max-width: 1000px; margin: 60px auto; }
-    .preview-item { 
-        display: flex; 
-        align-items: center; 
-        gap: 40px; 
-        margin-bottom: 80px; 
-        padding: 0 20px;
+    .preview-item {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      margin-bottom: 80px;
+      padding: 0 20px;
     }
     .preview-item:nth-child(even) { flex-direction: row-reverse; }
     .preview-img { width: 45%; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
@@ -93,7 +93,7 @@
 
     .modal-left { flex: 1.2; background: #f4f4f4; position: relative; height: auto; min-height: 500px; overflow: hidden; }
     .modal-gallery { display: flex; width: 100%; height: 100%; transition: transform 0.5s ease; }
-    
+
     .modal-gallery img { width: 100%; min-width: 100%; height: 100%; object-fit: cover; flex-shrink: 0; background: #f4f4f4; }
 
     .modal-nav { position: absolute; top: 50%; width: 100%; display: none; justify-content: space-between; padding: 0 15px; box-sizing: border-box; transform: translateY(-50%); z-index: 50; }
@@ -107,14 +107,14 @@
 
     .select-modal { width: 100%; padding: 12px; border-radius: 12px; border: 1.5px solid #eee; margin-bottom: 15px; font-family: inherit; font-size: 0.95rem; cursor: pointer; }
     .btn-add-carrinho { background: #dcbfa6; color: white; border: none; padding: 15px; border-radius: 30px; margin-bottom: 10px; cursor: pointer; font-weight: bold; transition: 0.3s; }
-    .btn-wpp { background: var(--dark); color: #fff; text-decoration: none; padding: 18px; text-align: center; border-radius: 60px; font-weight: bold; transition: 0.3s; font-size: 0.95rem; }
 
     /* --- CARRINHO --- */
     .carrinho-container { max-width: 800px; margin: 40px auto; background: white; padding: 40px; border-radius: 25px; border: 1px solid #eee; }
     .item-carrinho { display: flex; justify-content: space-between; border-bottom: 1px solid #eee; padding: 15px 0; }
     .btn-remover { color: red; cursor: pointer; background: none; border: none; font-size: 0.8rem; }
+    .btn-wpp { background: var(--dark); color: #fff; text-decoration: none; padding: 18px; text-align: center; border-radius: 60px; font-weight: bold; transition: 0.3s; font-size: 0.95rem; }
 
-    /* --- FORMULÁRIO DE CONTACTO (Estilos ajustados para o rodapé) --- */
+    /* --- FORMULÁRIO DE CONTACTO (Rodapé) --- */
     .form-group { margin-bottom: 15px; text-align: left; }
     .form-group label { display: block; font-size: 0.8rem; font-weight: bold; color: var(--ouro); margin-bottom: 5px; text-transform: none; }
     .form-group input, .form-group textarea { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 10px; font-family: inherit; box-sizing: border-box; }
@@ -142,15 +142,15 @@
   <img src="Fotos/BloomLogo.jpg" class="nav-logo" onclick="trocarPagina('inicio')">
   <div class="nav-links">
     <a onclick="trocarPagina('inicio')">Início</a>
-    <a onclick="trocarPagina('produtos')">Produtos</a>
-    <a onclick="trocarPagina('sobre')">Sobre nós</a>
+    <a onclick="trocarPagina('produtos')">Os nossos Produtos</a>
+    <a onclick="trocarPagina('sobre')">Quem somos?</a>
     <a onclick="trocarPagina('carrinho')" class="btn-carrinho">🛒 Carrinho (<span id="count-nav">0</span>)</a>
   </div>
 </nav>
 
 <section id="inicio" class="secao ativa">
   <div class="hero-inicio">
-    <h1>Bem-vinda à Bloom by Poly</h1>
+    <h1>Bem-vindo à Bloom by Poly</h1>
     <p>A Bloom nasceu do fascínio pelo poder transformador das velas. O que começou como um gosto pessoal pela luz e pelo aroma, evoluiu para uma marca onde cada peça é criada artesanalmente para ser mais do que uma vela: é um objeto de design que eleva a estética do seu lar.</p>
   </div>
   <div class="preview-produtos">
@@ -158,7 +158,7 @@
       <img src="Fotos/9_JarraPers_II.jpg" class="preview-img">
       <div class="preview-texto">
         <h3>Jarras Personalizadas</h3>
-        <p>Um encontro entre a nossa arte floral e o design assinado. Peças exclusivas que trazem sofisticação imediata a qualquer mesa ou aparador.</p>
+        <p>Um encontro entre a nossa arte floral e o design assinado de Luís Chaves. Peças exclusivas que trazem sofisticação imediata a qualquer espaço da sua casa.</p>
       </div>
     </div>
     <div class="preview-item">
@@ -200,7 +200,7 @@
     <div id="lista-carrinho"></div>
     <div style="margin-top:20px; border-top:2px solid #eee; padding-top:20px; text-align:right;">
       <h3>Total: <span id="total-carrinho">0,00€</span></h3>
-      <button onclick="finalizarCarrinhoEmail()" class="btn-wpp" style="width:100%; border:none; cursor:pointer;">ENVIAR ENCOMENDA POR EMAIL</button>
+      <button onclick="finalizarCarrinhoForms()" class="btn-wpp" style="width:100%; border:none; cursor:pointer;">FINALIZAR NO FORMULÁRIO</button>
     </div>
   </div>
 </section>
@@ -227,9 +227,58 @@
         <label id="m-sub-label" style="font-size: 0.75rem; font-weight: bold; color: var(--ouro); display: block; margin-bottom: 5px; text-transform: uppercase;"></label>
         <select id="m-sub-select" class="select-modal" onchange="syncModal()"></select>
       </div>
+
+      <div id="m-cor-cont" style="margin-bottom: 15px;">
+        <label style="font-size: 0.75rem; font-weight: bold; color: var(--ouro); display: block; margin-bottom: 5px;">COR:</label>
+        <select id="m-cor" class="select-modal">
+          <option value="" disabled selected>Selecione uma cor</option>
+          <option value="Branco">Branco</option>
+          <optgroup label="Tons quentes e Avermelhados">
+            <option value="Burgundy">Burgundy</option>
+            <option value="Plum">Plum</option>
+            <option value="Rosa">Rosa</option>
+          </optgroup>
+          <optgroup label="Tons Terrosos e Neutros">
+            <option value="Café">Café</option>
+            <option value="Castanho">Castanho</option>
+          </optgroup>
+          <optgroup label="Tons cítricos e Vibrantes">
+            <option value="Amarelo">Amarelo</option>
+            <option value="Laranja">Laranja</option>
+          </optgroup>
+          <optgroup label="Tons frios">
+            <option value="Azul Safira">Azul Safira</option>
+            <option value="Azul Celeste">Azul Celeste</option>
+            <option value="Roxo">Roxo</option>
+            <option value="Verde">Verde</option>
+          </optgroup>
+        </select>
+      </div>
+
+      <div id="m-essencia-cont" style="margin-bottom: 15px;">
+        <label style="font-size: 0.75rem; font-weight: bold; color: var(--ouro); display: block; margin-bottom: 5px;">ESSÊNCIA:</label>
+        <select id="m-essencia" class="select-modal">
+          <option value="" disabled selected>Selecione uma essência</option>
+          <optgroup label="Cítricos">
+            <option value="Lime Basil & Mandarin">Lime Basil & Mandarin</option>
+            <option value="Laranja">Laranja</option>
+          </optgroup>
+          <optgroup label="Floral">
+            <option value="Sakura">Sakura</option>
+            <option value="Magnólia Japonesa">Magnólia Japonesa</option>
+            <option value="Jasmim">Jasmim</option>
+            <option value="Lavanda">Lavanda</option>
+          </optgroup>
+          <optgroup label="Oriental/Amadeirado">
+            <option value="Âmbar e Sândalo">Âmbar e Sândalo</option>
+          </optgroup>
+          <option value="Sem essência">Sem essência</option>
+        </select>
+      </div>
+
       <div id="m-ref" class="ref-tag"></div>
       <div id="m-preco" style="font-size: 1.6rem; color: var(--ouro); margin-bottom: 20px; font-weight: bold;"></div>
-      
+
       <button onclick="adicionarAoCarrinho()" class="btn-add-carrinho">ADICIONAR AO CARRINHO</button>
     </div>
   </div>
@@ -237,9 +286,9 @@
 
 <footer>
   <div class="footer-col">
-    <h4>Onde nos encontrar</h4>
+    <h4>Onde nos encontrar?</h4>
     <p><a href="https://www.instagram.com/poly.bloom27" target="_blank" style="text-decoration:none; color:inherit;">Instagram</a></p>
-    <p><a href="https://www.facebook.com/share/1DKkx39AAQ/?mibextid=wwXIfr" target="_blank" style="text-decoration:none; color:inherit;">Bloom by Poly (Facebook)</a></p>
+    <p><a href="https://www.facebook.com/share/1DKkx39AAQ/?mibextid=wwXIfr" target="_blank" style="text-decoration:none; color:inherit;">Facebook</a></p>
   </div>
   <div class="footer-col">
     <h4>Contactos</h4>
@@ -247,14 +296,15 @@
     <p><a href="https://wa.me/351963404327" style="text-decoration:none; color:inherit;">WhatsApp</a></p>
   </div>
   <div class="footer-col" style="max-width: 400px; width: 100%;">
-    <h4>Dúvidas Gerais?</h4>
+    <h4>Pedidos Especiais & Eventos</h4>
+    <p style="font-size: 0.85rem; color: #555; margin-bottom: 15px;">Contacte-nos caso tenha dúvidas, para saber as condições de envio, informações sobre eventos ou encomendas em larga escala.</p>
     <form action="mailto:poly.bloom27@gmail.com" method="GET" enctype="text/plain">
       <div class="form-group">
         <label>NOME</label>
         <input type="text" name="subject" required>
       </div>
       <div class="form-group">
-        <label>DESCRIÇÃO</label>
+        <label>MENSAGEM</label>
         <textarea name="body" rows="4" required></textarea>
       </div>
       <button type="submit" class="btn-enviar-form">ENVIAR MENSAGEM</button>
@@ -316,8 +366,12 @@
     document.getElementById('m-preco').innerText = curProd.preco;
     const gal = document.getElementById('modalGallery');
     gal.innerHTML = curProd.fotos.map(f => `<img src="${f}">`).join('');
-    
+
     document.getElementById('nav-buttons').style.display = curProd.fotos.length > 1 ? 'flex' : 'none';
+
+    // Obriga o utilizador a escolher a cor e a essência sempre que abre um produto
+    document.getElementById('m-cor').selectedIndex = 0;
+    document.getElementById('m-essencia').selectedIndex = 0;
 
     const sel = document.getElementById('m-select');
     if(curProd.opcoes.length > 0) {
@@ -361,7 +415,20 @@
   function closeModal() { document.getElementById('productModal').style.display = 'none'; document.body.style.overflow = 'auto'; }
 
   function adicionarAoCarrinho() {
-    carrinho.push({ titulo: document.getElementById('m-titulo').innerText, preco: document.getElementById('m-preco').innerText, ref: document.getElementById('m-ref').innerText });
+    const cor = document.getElementById('m-cor').value;
+    const essencia = document.getElementById('m-essencia').value;
+
+    // VALIDAÇÃO: Bloqueia se a pessoa não escolher Cor ou Essência
+    if(!cor) return alert("Por favor, selecione a Cor pretendida antes de adicionar ao carrinho.");
+    if(!essencia) return alert("Por favor, selecione a Essência pretendida antes de adicionar ao carrinho.");
+
+    carrinho.push({
+      titulo: document.getElementById('m-titulo').innerText,
+      preco: document.getElementById('m-preco').innerText,
+      ref: document.getElementById('m-ref').innerText,
+      cor: cor,
+      essencia: essencia
+    });
     localStorage.setItem('bloom_carrinho', JSON.stringify(carrinho));
     atualizarUI();
     alert("Produto adicionado ao carrinho!");
@@ -373,22 +440,40 @@
     lista.innerHTML = "";
     let total = 0;
     carrinho.forEach((item, i) => {
-        const pNum = parseFloat(item.preco.replace('€','').replace(',','.'));
-        total += isNaN(pNum) ? 0 : pNum;
-        lista.innerHTML += `<div class="item-carrinho"><span>${item.titulo} (${item.ref})</span><span>${item.preco} <button class="btn-remover" onclick="removerItem(${i})">Remover</button></span></div>`;
+      const pNum = parseFloat(item.preco.replace('€','').replace(',','.'));
+      total += isNaN(pNum) ? 0 : pNum;
+      lista.innerHTML += `<div class="item-carrinho" style="align-items:center;">
+          <div>
+            <span style="font-weight:bold;">${item.titulo} (${item.ref})</span><br>
+            <span style="font-size:0.85rem; color:#666;">Cor: ${item.cor} | Essência: ${item.essencia}</span>
+          </div>
+          <div>
+            <span>${item.preco}</span>
+            <button class="btn-remover" onclick="removerItem(${i})" style="margin-left:15px;">Remover</button>
+          </div>
+        </div>`;
     });
     document.getElementById('total-carrinho').innerText = total.toFixed(2).replace('.',',') + "€";
   }
 
   function removerItem(i) { carrinho.splice(i, 1); localStorage.setItem('bloom_carrinho', JSON.stringify(carrinho)); atualizarUI(); }
 
-  function finalizarCarrinhoEmail() {
-    if(carrinho.length === 0) return alert("Carrinho vazio!");
-    let t = "Olá Bloom! Gostaria de encomendar:%0D%0A";
-    carrinho.forEach(i => t += `- ${i.titulo} [${i.ref}] (${i.preco})%0D%0A`);
-    t += `%0D%0ATotal: ${document.getElementById('total-carrinho').innerText}`;
-    window.location.href = `mailto:poly.bloom27@gmail.com?subject=Encomenda Bloom&body=${t}`;
+  function finalizarCarrinhoForms() {
+    if(carrinho.length === 0) return alert("O teu carrinho está vazio!");
+
+    let resumoProdutos = "ENCOMENDA BLOOM:\n\n";
+    carrinho.forEach(item => {
+      resumoProdutos += `- ${item.titulo} [Ref: ${item.ref}] | Cor: ${item.cor} | Essência: ${item.essencia} (${item.preco})\n`;
+    });
+    resumoProdutos += `\nTOTAL: ${document.getElementById('total-carrinho').innerText}`;
+
+    const baseUrl = "https://docs.google.com/forms/d/e/1FAIpQLScqdhb7VGIODJbr4Ja3xY8qg-bdYKia09QkwgQ_H-ktV042kA/viewform?usp=pp_url";
+    const entryId = "&entry.1838143195=";
+
+    const linkFinal = baseUrl + entryId + encodeURIComponent(resumoProdutos);
+    window.open(linkFinal, '_blank');
   }
+
   atualizarUI();
 </script>
 </body>
