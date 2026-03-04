@@ -94,7 +94,6 @@
     .modal-left { flex: 1.2; background: #f4f4f4; position: relative; height: auto; min-height: 500px; overflow: hidden; }
     .modal-gallery { display: flex; width: 100%; height: 100%; transition: transform 0.5s ease; }
     
-    /* REVERSÃO: Imagem a cobrir todo o espaço (cover) como no original */
     .modal-gallery img { width: 100%; min-width: 100%; height: 100%; object-fit: cover; flex-shrink: 0; background: #f4f4f4; }
 
     .modal-nav { position: absolute; top: 50%; width: 100%; display: none; justify-content: space-between; padding: 0 15px; box-sizing: border-box; transform: translateY(-50%); z-index: 50; }
@@ -110,11 +109,9 @@
     .btn-add-carrinho { background: #dcbfa6; color: white; border: none; padding: 15px; border-radius: 30px; margin-bottom: 10px; cursor: pointer; font-weight: bold; transition: 0.3s; }
     .btn-wpp { background: var(--dark); color: #fff; text-decoration: none; padding: 18px; text-align: center; border-radius: 60px; font-weight: bold; transition: 0.3s; font-size: 0.95rem; }
 
-    /* --- FORMULÁRIO DE CONTACTO --- */
-    .form-contacto { max-width: 600px; margin: 40px auto; padding: 30px; background: #fff; border-radius: 20px; border: 1px solid #eee; text-align: center; }
-    .form-contacto h4 { color: var(--ouro); text-transform: uppercase; margin-bottom: 20px; }
+    /* --- FORMULÁRIO DE CONTACTO (Estilos ajustados para o rodapé) --- */
     .form-group { margin-bottom: 15px; text-align: left; }
-    .form-group label { display: block; font-size: 0.8rem; font-weight: bold; color: var(--ouro); margin-bottom: 5px; }
+    .form-group label { display: block; font-size: 0.8rem; font-weight: bold; color: var(--ouro); margin-bottom: 5px; text-transform: none; }
     .form-group input, .form-group textarea { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 10px; font-family: inherit; box-sizing: border-box; }
     .btn-enviar-form { width: 100%; background: var(--ouro); color: white; border: none; padding: 15px; border-radius: 30px; font-weight: bold; cursor: pointer; }
 
@@ -203,15 +200,6 @@
   </div>
 </section>
 
-<section class="form-contacto">
-  <h4>Dúvidas Gerais?</h4>
-  <form action="mailto:poly.bloom27@gmail.com" method="GET" enctype="text/plain">
-    <div class="form-group"><label>NOME</label><input type="text" name="subject" required></div>
-    <div class="form-group"><label>DESCRIÇÃO</label><textarea name="body" rows="4" required></textarea></div>
-    <button type="submit" class="btn-enviar-form">ENVIAR MENSAGEM</button>
-  </form>
-</section>
-
 <div id="productModal" class="modal">
   <div class="modal-content">
     <span class="close" onclick="closeModal()">&times;</span>
@@ -236,8 +224,8 @@
       </div>
       <div id="m-ref" class="ref-tag"></div>
       <div id="m-preco" style="font-size: 1.6rem; color: var(--ouro); margin-bottom: 20px; font-weight: bold;"></div>
+      
       <button onclick="adicionarAoCarrinho()" class="btn-add-carrinho">ADICIONAR AO CARRINHO</button>
-      <a id="m-link" href="#" target="_blank" class="btn-wpp">ENCOMENDAR VIA WHATSAPP</a>
     </div>
   </div>
 </div>
@@ -252,6 +240,20 @@
     <h4>Contactos</h4>
     <p>Email: poly.bloom27@gmail.com</p>
     <p><a href="https://wa.me/351963404327" style="text-decoration:none; color:inherit;">WhatsApp</a></p>
+  </div>
+  <div class="footer-col" style="max-width: 400px; width: 100%;">
+    <h4>Dúvidas Gerais?</h4>
+    <form action="mailto:poly.bloom27@gmail.com" method="GET" enctype="text/plain">
+      <div class="form-group">
+        <label>NOME</label>
+        <input type="text" name="subject" required>
+      </div>
+      <div class="form-group">
+        <label>DESCRIÇÃO</label>
+        <textarea name="body" rows="4" required></textarea>
+      </div>
+      <button type="submit" class="btn-enviar-form">ENVIAR MENSAGEM</button>
+    </form>
   </div>
 </footer>
 
@@ -347,7 +349,6 @@
     document.getElementById('m-preco').innerText = preco;
     document.getElementById('m-ref').innerText = `Ref: ${ref}`;
     updateGallery();
-    document.getElementById('m-link').href = `https://wa.me/351963404327?text=Gostaria de saber mais sobre: ${nome} [Ref: ${ref}]`;
   }
 
   function updateGallery() { document.getElementById('modalGallery').style.transform = `translateX(-${curImgIdx * 100}%)`; }
