@@ -109,6 +109,11 @@
     .btn-add-carrinho { background: #dcbfa6; color: white; border: none; padding: 15px; border-radius: 30px; margin-bottom: 10px; cursor: pointer; font-weight: bold; transition: 0.3s; }
     .btn-wpp { background: var(--dark); color: #fff; text-decoration: none; padding: 18px; text-align: center; border-radius: 60px; font-weight: bold; transition: 0.3s; font-size: 0.95rem; }
 
+    /* --- CARRINHO --- */
+    .carrinho-container { max-width: 800px; margin: 40px auto; background: white; padding: 40px; border-radius: 25px; border: 1px solid #eee; }
+    .item-carrinho { display: flex; justify-content: space-between; border-bottom: 1px solid #eee; padding: 15px 0; }
+    .btn-remover { color: red; cursor: pointer; background: none; border: none; font-size: 0.8rem; }
+
     /* --- FORMULÁRIO DE CONTACTO (Estilos ajustados para o rodapé) --- */
     .form-group { margin-bottom: 15px; text-align: left; }
     .form-group label { display: block; font-size: 0.8rem; font-weight: bold; color: var(--ouro); margin-bottom: 5px; text-transform: none; }
@@ -370,7 +375,7 @@
     carrinho.forEach((item, i) => {
         const pNum = parseFloat(item.preco.replace('€','').replace(',','.'));
         total += isNaN(pNum) ? 0 : pNum;
-        lista.innerHTML += `<div style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid #eee;"><span>${item.titulo} (${item.ref})</span><span>${item.preco} <button class="btn-remover" onclick="removerItem(${i})">Remover</button></span></div>`;
+        lista.innerHTML += `<div class="item-carrinho"><span>${item.titulo} (${item.ref})</span><span>${item.preco} <button class="btn-remover" onclick="removerItem(${i})">Remover</button></span></div>`;
     });
     document.getElementById('total-carrinho').innerText = total.toFixed(2).replace('.',',') + "€";
   }
