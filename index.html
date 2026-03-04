@@ -2,9 +2,10 @@
 <html lang="pt">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bloom by Poly | Catálogo Profissional</title>
   <style>
+    /* DEFINIÇÃO DE CORES HARMONIZADAS - MANTIDAS */
     :root {
       --ouro: #b8926a;
       --bege-pagina: #fdfaf8;
@@ -18,13 +19,12 @@
       color: var(--dark);
       background-color: var(--bege-pagina);
       margin: 0;
-      overflow-x: hidden;
     }
 
-    /* --- NAVEGAÇÃO RESPONSIVA --- */
+    /* --- NAVEGAÇÃO --- */
     nav {
       background-color: var(--branco-header);
-      padding: 10px 20px;
+      padding: 15px 40px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -34,88 +34,93 @@
       border-bottom: 1px solid #ece5e5;
     }
 
-    .nav-logo { max-height: 50px; cursor: pointer; }
-    .nav-links { display: flex; gap: 12px; align-items: center; }
+    .nav-logo { max-height: 60px; cursor: pointer; }
+    .nav-links { display: flex; gap: 25px; align-items: center; }
     .nav-links a { 
         text-decoration: none; 
         color: var(--dark); 
         font-weight: bold; 
         text-transform: uppercase; 
-        font-size: 0.7rem; 
-        letter-spacing: 0.5px;
+        font-size: 0.85rem; 
+        letter-spacing: 1px;
+        cursor: pointer;
     }
     
     .btn-carrinho {
         background: var(--ouro);
         color: white !important;
-        padding: 6px 12px;
+        padding: 8px 15px;
         border-radius: 20px;
     }
 
     /* --- SECÇÕES --- */
-    .secao { display: none; padding: 20px 15px; }
+    .secao { display: none; padding-top: 20px; }
     .secao.ativa { display: block; }
 
-    /* --- AJUSTES MOBILE INÍCIO --- */
-    .hero-inicio { max-width: 800px; margin: 20px auto; text-align: center; }
-    .hero-inicio h1 { color: var(--ouro); font-size: 1.6rem; margin-bottom: 10px; }
+    /* --- PÁGINA INÍCIO --- */
+    .hero-inicio { max-width: 900px; margin: 40px auto; text-align: center; padding: 0 20px; }
+    .hero-inicio h1 { color: var(--ouro); font-weight: normal; }
     
-    .preview-produtos { max-width: 900px; margin: 30px auto; }
-    .preview-item { display: flex; align-items: center; gap: 15px; margin-bottom: 40px; }
-    .preview-item:nth-child(even) { flex-direction: row-reverse; }
-    .preview-img { width: 40%; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-    .preview-texto { width: 60%; }
-    .preview-texto h3 { color: var(--ouro); font-size: 1.1rem; margin: 0; }
-    .preview-texto p { font-size: 0.85rem; margin-top: 5px; }
-
-    /* --- VITRINE MOBILE --- */
-    .catalogo { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; padding: 10px; }
-    .card { background: #fcfcf2; border-radius: 15px; padding: 12px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
-    .card img { width: 100%; height: 180px; object-fit: cover; border-radius: 12px; }
-    .card h3 { font-size: 0.9rem; margin: 10px 0 5px; }
-
-    /* --- MODAL RESPONSIVO (CORREÇÃO DE OPÇÕES) --- */
-    .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); overflow-y: auto; }
-    .modal-content { 
-        background: #fff; margin: 0; width: 100%; min-height: 100vh; 
-        display: flex; flex-direction: column; position: relative; 
+    .preview-produtos { max-width: 1000px; margin: 60px auto; }
+    .preview-item { 
+        display: flex; 
+        align-items: center; 
+        gap: 40px; 
+        margin-bottom: 80px; 
+        padding: 0 20px;
     }
-    .modal-left { flex: none; height: 40vh; width: 100%; position: relative; }
-    .modal-right { flex: 1; padding: 25px; display: flex; flex-direction: column; background: white; }
-    .close { position: absolute; right: 15px; top: 15px; z-index: 3000; font-size: 28px; background: white; width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+    .preview-item:nth-child(even) { flex-direction: row-reverse; }
+    .preview-img { width: 45%; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+    .preview-texto { width: 55%; }
+    .preview-texto h3 { color: var(--ouro); font-size: 1.5rem; }
+
+    /* --- VITRINE --- */
+    .catalogo { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; padding: 40px; max-width: 1200px; margin: 0 auto; }
+    .card { background: #fcfcf2; border-radius: 25px; padding: 20px; text-align: center; cursor: pointer; transition: 0.4s; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+    .card img { width: 100%; height: 280px; object-fit: cover; border-radius: 20px; }
+    .card h3 { font-size: 1.2rem; margin: 20px 0 5px; font-weight: 400; }
+    .card .preco-vitrine { color: var(--ouro); font-weight: bold; font-size: 1.1rem; }
+
+    /* --- MODAL (CORRECÇÃO DA IMAGEM) --- */
+    .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); overflow-y: auto; }
+    .modal-content { background: #fff; margin: 2% auto; width: 95%; max-width: 1100px; border-radius: 35px; display: flex; flex-wrap: nowrap; position: relative; overflow: hidden; max-height: 90vh; }
+    
+    .modal-left { flex: 1.2; background: #f4f4f4; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .modal-gallery { display: flex; width: 100%; height: 100%; transition: transform 0.5s ease; }
+    
+    /* FIX: Imagem agora contida e sem cortes */
+    .modal-gallery img { 
+        width: 100%; 
+        height: 100%; 
+        object-fit: contain; /* Garante que a foto aparece inteira */
+        flex-shrink: 0; 
+    }
+
+    .close { position: absolute; right: 20px; top: 20px; font-size: 30px; cursor: pointer; z-index: 3000; color: #333; background: rgba(255,255,255,0.9); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+    .modal-nav { position: absolute; top: 50%; width: 100%; display: flex; justify-content: space-between; padding: 0 15px; transform: translateY(-50%); z-index: 50; }
+    .m-btn { background: rgba(255,255,255,0.9); border: none; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; color: var(--ouro); }
+
+    .modal-right { flex: 1; padding: 40px; display: flex; flex-direction: column; background: #fff; overflow-y: auto; }
+    .btn-add-carrinho { background: #dcbfa6; color: white; border: none; padding: 15px; border-radius: 30px; margin-bottom: 10px; cursor: pointer; font-weight: bold; }
+    .btn-wpp { background: var(--dark); color: #fff; text-decoration: none; padding: 18px; text-align: center; border-radius: 60px; font-weight: bold; }
+    .select-modal { width: 100%; padding: 12px; border-radius: 12px; border: 1.5px solid #eee; margin-bottom: 15px; }
 
     /* --- FORMULÁRIO DE CONTACTO --- */
-    .contacto-container { 
-        max-width: 500px; 
-        margin: 50px auto; 
-        padding: 30px 20px; 
-        background: #fff; 
-        border-radius: 20px; 
-        border: 1px solid #eee;
-        text-align: center;
-    }
-    .contacto-container h4 { color: var(--ouro); text-transform: uppercase; margin-bottom: 20px; font-size: 0.9rem; }
+    .form-contacto { max-width: 600px; margin: 40px auto; padding: 30px; background: #fff; border-radius: 20px; border: 1px solid #eee; text-align: center; }
+    .form-contacto h4 { color: var(--ouro); text-transform: uppercase; margin-bottom: 20px; }
     .form-group { margin-bottom: 15px; text-align: left; }
-    .form-group label { display: block; font-size: 0.75rem; font-weight: bold; margin-bottom: 5px; color: var(--ouro); }
-    .form-group input, .form-group textarea { 
-        width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 10px; 
-        font-family: inherit; font-size: 0.9rem; box-sizing: border-box;
-    }
-    .btn-enviar-contacto { 
-        width: 100%; background: var(--ouro); color: white; border: none; 
-        padding: 15px; border-radius: 30px; font-weight: bold; cursor: pointer; 
-        transition: 0.3s;
-    }
+    .form-group label { font-size: 0.8rem; font-weight: bold; color: var(--ouro); }
+    .form-group input, .form-group textarea { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 10px; box-sizing: border-box; }
+    .btn-enviar-form { width: 100%; background: var(--ouro); color: white; border: none; padding: 15px; border-radius: 30px; font-weight: bold; cursor: pointer; }
 
-    /* Desktop Adjustments */
-    @media (min-width: 851px) {
-        .modal-content { flex-direction: row; margin: 2% auto; width: 95%; max-width: 1100px; min-height: auto; height: 90vh; border-radius: 35px; }
-        .modal-left { flex: 1.2; height: auto; }
-        .modal-right { flex: 1; overflow-y: auto; }
-        .nav-links a { font-size: 0.85rem; gap: 25px; }
-        .nav-logo { max-height: 60px; }
-        .catalogo { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
-        .card img { height: 280px; }
+    footer { text-align: center; padding: 60px 20px; background: #fff; border-top: 1px solid #eee; display: flex; justify-content: space-around; flex-wrap: wrap; }
+    .footer-col { min-width: 250px; margin-bottom: 30px; }
+
+    @media (max-width: 850px) {
+      .modal-content { flex-direction: column; width: 100%; height: 100%; max-height: 100vh; margin: 0; border-radius: 0; }
+      .modal-left { height: 45vh; flex: none; }
+      .modal-right { padding: 25px; flex: 1; }
+      .nav-links a { font-size: 0.7rem; }
     }
   </style>
 </head>
@@ -127,27 +132,23 @@
     <a onclick="trocarPagina('inicio')">Início</a>
     <a onclick="trocarPagina('produtos')">Produtos</a>
     <a onclick="trocarPagina('sobre')">Sobre nós</a>
-    <a onclick="trocarPagina('carrinho')" class="btn-carrinho">🛒 (<span id="count-nav">0</span>)</a>
+    <a onclick="trocarPagina('carrinho')" class="btn-carrinho">🛒 Carrinho (<span id="count-nav">0</span>)</a>
   </div>
 </nav>
 
 <section id="inicio" class="secao ativa">
   <div class="hero-inicio">
     <h1>Bem-vinda à Bloom by Poly</h1>
-    <p>A Bloom nasceu do fascínio pelo poder transformador das velas decorativas e artesanais.</p>
+    <p>A Bloom nasceu do fascínio pelo poder transformador das velas artesanais e objetos de design.</p>
   </div>
   <div class="preview-produtos">
     <div class="preview-item">
       <img src="Fotos/9_JarraPers_II.jpg" class="preview-img">
-      <div class="preview-texto"><h3>Jarras Personalizadas</h3><p>Design assinado e exclusividade.</p></div>
+      <div class="preview-texto"><h3>Jarras Personalizadas</h3><p>Peças exclusivas de design assinado.</p></div>
     </div>
     <div class="preview-item">
-      <img src="Fotos/12_MiniaturaCesto.jpg" class="preview-img">
       <div class="preview-texto"><h3>Miniaturas</h3><p>Pequenos detalhes, grandes impactos.</p></div>
-    </div>
-    <div class="preview-item">
-      <img src="Fotos/7_VelasInd.jpg" class="preview-img">
-      <div class="preview-texto"><h3>Velas Individuais</h3><p>Esculturas de cera puras e elegantes.</p></div>
+      <img src="Fotos/12_MiniaturaCesto.jpg" class="preview-img">
     </div>
   </div>
 </section>
@@ -156,36 +157,23 @@
   <main class="catalogo" id="vitrine"></main>
 </section>
 
-<section id="sobre" class="secao">
-  <div class="sobre-container" style="text-align:center; padding: 20px;">
-    <h4>Sobre nós</h4>
-    <p>Bloom by Poly transforma espaços através da estética artesanal.</p>
-  </div>
-</section>
-
 <section id="carrinho" class="secao">
   <div class="carrinho-container">
     <h2>O Teu Carrinho</h2>
     <div id="lista-carrinho"></div>
-    <div style="margin-top:20px; text-align:right; border-top:1px solid #eee; padding-top:20px;">
+    <div style="margin-top:20px; border-top:2px solid #eee; padding-top:20px; text-align:right;">
       <h3>Total: <span id="total-carrinho">0,00€</span></h3>
-      <button onclick="finalizarCarrinhoEmail()" class="btn-enviar-contacto">ENVIAR ENCOMENDA POR EMAIL</button>
+      <button onclick="finalizarCarrinhoEmail()" class="btn-wpp" style="width:100%; border:none; cursor:pointer;">ENVIAR ENCOMENDA POR EMAIL</button>
     </div>
   </div>
 </section>
 
-<section class="contacto-container">
-  <h4>Tens alguma dúvida?</h4>
+<section class="form-contacto">
+  <h4>Dúvidas Gerais?</h4>
   <form action="mailto:poly.bloom27@gmail.com" method="GET" enctype="text/plain">
-    <div class="form-group">
-      <label>NOME</label>
-      <input type="text" name="subject" placeholder="O seu nome" required>
-    </div>
-    <div class="form-group">
-      <label>MENSAGEM / DÚVIDA</label>
-      <textarea name="body" rows="4" placeholder="Como podemos ajudar?" required></textarea>
-    </div>
-    <button type="submit" class="btn-enviar-contacto">ENVIAR DÚVIDA</button>
+    <div class="form-group"><label>NOME</label><input type="text" name="subject" required></div>
+    <div class="form-group"><label>DESCRIÇÃO</label><textarea name="body" rows="4" required></textarea></div>
+    <button type="submit" class="btn-enviar-form">ENVIAR MENSAGEM</button>
   </form>
 </section>
 
@@ -201,23 +189,19 @@
     </div>
     <div class="modal-right">
       <h2 id="m-titulo"></h2>
-      <p id="m-desc" style="font-size: 0.9rem; color: #666;"></p>
-      
+      <p id="m-desc"></p>
       <div id="m-opcoes-cont">
-        <label style="font-size: 0.7rem; font-weight: bold; color: var(--ouro);">ESCOLHER OPÇÃO:</label>
-        <select id="m-select" class="select-modal" onchange="syncModal()" style="width:100%; padding:10px; border-radius:10px; margin-bottom:10px;"></select>
+        <label style="font-size: 0.75rem; font-weight: bold; color: var(--ouro);">OPÇÃO:</label>
+        <select id="m-select" class="select-modal" onchange="syncModal()"></select>
       </div>
-
       <div id="m-sub-opcoes-cont" style="display: none;">
-        <label id="m-sub-label" style="font-size: 0.7rem; font-weight: bold; color: var(--ouro);"></label>
-        <select id="m-sub-select" class="select-modal" onchange="syncModal()" style="width:100%; padding:10px; border-radius:10px; margin-bottom:10px;"></select>
+        <label id="m-sub-label" style="font-size: 0.75rem; font-weight: bold; color: var(--ouro);"></label>
+        <select id="m-sub-select" class="select-modal" onchange="syncModal()"></select>
       </div>
-
-      <div id="m-ref" class="ref-tag"></div>
-      <div id="m-preco" style="font-size: 1.5rem; color: var(--ouro); font-weight: bold; margin: 10px 0;"></div>
-      
-      <button onclick="adicionarAoCarrinho()" class="btn-enviar-contacto" style="margin-bottom:10px;">ADICIONAR AO CARRINHO</button>
-      <a id="m-link" href="#" target="_blank" style="text-decoration:none; text-align:center; color: #25D366; font-weight:bold; font-size:0.8rem;">DÚVIDAS VIA WHATSAPP</a>
+      <div id="m-ref" style="font-size: 0.8rem; font-weight: bold; margin-bottom: 15px;"></div>
+      <div id="m-preco" style="font-size: 1.6rem; color: var(--ouro); margin-bottom: 20px; font-weight: bold;"></div>
+      <button onclick="adicionarAoCarrinho()" class="btn-add-carrinho">ADICIONAR AO CARRINHO</button>
+      <a id="m-link" href="#" target="_blank" class="btn-wpp">WHATSAPP</a>
     </div>
   </div>
 </div>
@@ -226,24 +210,16 @@
   <div class="footer-col">
     <h4>Onde nos encontrar</h4>
     <p><a href="https://www.instagram.com/poly.bloom27" target="_blank" style="text-decoration:none; color:inherit;">Instagram</a></p>
-    <p><a href="https://www.facebook.com/share/1DKkx39AAQ/?mibextid=wwXIfr" target="_blank" style="text-decoration:none; color:inherit;">Bloom by Poly (Facebook)</a></p>
+    <p><a href="https://www.facebook.com/share/1DKkx39AAQ/?mibextid=wwXIfr" target="_blank" style="text-decoration:none; color:inherit;">Bloom by Poly</a></p>
   </div>
   <div class="footer-col">
     <h4>Contactos</h4>
     <p>Email: poly.bloom27@gmail.com</p>
-    <p><a href="https://wa.me/351963404327" style="text-decoration:none; color:inherit;">WhatsApp</a></p>
   </div>
 </footer>
 
 <script>
-  // Lógica de Troca de Página
-  function trocarPagina(id) {
-    document.querySelectorAll('.secao').forEach(s => s.classList.remove('ativa'));
-    document.getElementById(id).classList.add('ativa');
-    window.scrollTo(0,0);
-  }
-
-  // Dados dos Produtos (Preços Atualizados para "A partir de")
+  let carrinho = JSON.parse(localStorage.getItem('bloom_carrinho')) || [];
   const produtos = [
     { id: 0, titulo: "Bouquet em caixa de Madeira", preco: "15,50€", ref: "BOUQ-MAD-01", desc: "Charme rústico e elegância floral.", fotos: ["Fotos/1_CaixaMadeira.jpg"], opcoes: [] },
     { id: 1, titulo: "Bouquet em Caixa de Cartão", preco: "A partir de 14,50€", ref: "BOUQ-CART-MED", desc: "Design contemporâneo em cartão de acabamento superior.", fotos: ["Fotos/2_CaixaCartao.jpg", "Fotos/10_CaixaCartaoCorrente.jpg", "Fotos/13_CaixaCartaoPeq.jpg"], opcoes: [
@@ -256,20 +232,18 @@
             { nome: "Branco", ref: "BOUQ-CART-PEQ-WT", preco: "14,50€", fotoIdx: 2 }
           ]}
       ]},
-    { id: 2, titulo: "Bouquet em Jarra", preco: "A partir de 7,00€", ref: "BOUQ-JAR-NORM", desc: "Elegância e delicadeza em vidro.", fotos: ["Fotos/3_ArranjoJarra.jpg", "Fotos/9_JarraPers_II.jpg", "Fotos/8_JarraPersonalizada.jpg"], opcoes: [
+    { id: 2, titulo: "Bouquet em Jarra", preco: "A partir de 7,00€", ref: "BOUQ-JAR-NORM", desc: "Elegância em vidro assinado.", fotos: ["Fotos/3_ArranjoJarra.jpg", "Fotos/9_JarraPers_II.jpg", "Fotos/8_JarraPersonalizada.jpg"], opcoes: [
         { nome: "Normal", ref: "BOUQ-JAR-NORM", preco: "7,00€", fotoIdx: 0 },
         { nome: "Personalizada", ref: "BOUQ-JAR-PERS", preco: "15,00€", fotoIdx: 1 }
-      ]},
-    { id: 3, titulo: "Bouquet Miniatura", preco: "4,50€", ref: "MINI-VASO-MET", desc: "Pequenos detalhes de harmonia.", fotos: ["Fotos/4_MiniVasosMetal.jpg", "Fotos/12_MiniaturaCesto.jpg", "Fotos/11_Miniaturas.jpg"], opcoes: [
-        { nome: "Vaso Metálico", ref: "MINI-VASO-MET", preco: "4,50€", fotoIdx: 0 },
-        { nome: "Cesto Artesanal", ref: "MINI-CESTO-ART", preco: "4,50€", fotoIdx: 1 }
-      ]},
-    { id: 4, titulo: "Vela em Taça Cerâmica", preco: "9,90€", ref: "VELA-TACA-CER", desc: "Estética orgânica e sofisticada.", fotos: ["Fotos/5_TacaCeramica.jpg"], opcoes: [] },
-    { id: 5, titulo: "Ramos de Flores", preco: "6,50€", ref: "RAMO-FLOR-IND", desc: "Pequenas esculturas de luz floral.", fotos: ["Fotos/6_FloresRamo.jpg"], opcoes: [] },
-    { id: 6, titulo: "Velas Individuais", preco: "4,50€", ref: "VELA-IND-PERS", desc: "Pureza de formas artesanais.", fotos: ["Fotos/14_VelasInd_II.jpg", "Fotos/7_VelasInd.jpg"], opcoes: [] }
+      ]}
   ];
 
-  // Renderizar Vitrine
+  function trocarPagina(id) {
+    document.querySelectorAll('.secao').forEach(s => s.classList.remove('ativa'));
+    document.getElementById(id).classList.add('ativa');
+    window.scrollTo(0,0);
+  }
+
   const vitrine = document.getElementById('vitrine');
   produtos.forEach(p => {
     const card = document.createElement('div'); card.className = 'card'; card.onclick = () => openModal(p.id);
@@ -277,8 +251,7 @@
     vitrine.appendChild(card);
   });
 
-  let curProd = null; let curImgIdx = 0; let carrinho = JSON.parse(localStorage.getItem('bloom_carrinho')) || [];
-
+  let curProd = null; let curImgIdx = 0;
   function openModal(id) {
     curProd = produtos[id]; curImgIdx = 0;
     document.getElementById('m-titulo').innerText = curProd.titulo;
@@ -286,13 +259,6 @@
     document.getElementById('m-preco').innerText = curProd.preco;
     const gal = document.getElementById('modalGallery');
     gal.innerHTML = curProd.fotos.map(f => `<img src="${f}">`).join('');
-    
-    const sel = document.getElementById('m-select');
-    if(curProd.opcoes.length > 0) {
-      document.getElementById('m-opcoes-cont').style.display = 'block';
-      sel.innerHTML = curProd.opcoes.map((o, i) => `<option value="${i}">${o.nome}</option>`).join('');
-    } else { document.getElementById('m-opcoes-cont').style.display = 'none'; }
-    
     syncModal(true);
     document.getElementById('productModal').style.display = 'block';
     document.body.style.overflow = 'hidden';
@@ -305,38 +271,33 @@
     let ref = curProd.ref; let preco = curProd.preco;
     
     if(curProd.opcoes.length > 0) {
-      const opt = curProd.opcoes[sel.value];
+      const opt = curProd.opcoes[sel.value] || curProd.opcoes[0];
       if(opt.subOpcoes) {
         subCont.style.display = 'block';
         document.getElementById('m-sub-label').innerText = opt.subTitulo;
         if(isNew) subSel.innerHTML = opt.subOpcoes.map((so, i) => `<option value="${i}">${so.nome}</option>`).join('');
-        const subOpt = opt.subOpcoes[subSel.value];
+        const subOpt = opt.subOpcoes[subSel.value] || opt.subOpcoes[0];
         ref = subOpt.ref; preco = subOpt.preco; curImgIdx = subOpt.fotoIdx;
       } else {
         subCont.style.display = 'none';
-        ref = opt.ref; preco = opt.preco; curImgIdx = opt.fotoIdx;
+        ref = opt.ref; preco = opt.preco; curImgIdx = opt.fotoIdx || 0;
       }
     }
     document.getElementById('m-preco').innerText = preco;
     document.getElementById('m-ref').innerText = `Ref: ${ref}`;
     updateGallery();
-    document.getElementById('m-link').href = `https://wa.me/351963404327?text=Dúvida sobre: ${curProd.titulo} [${ref}]`;
+    document.getElementById('m-link').href = `https://wa.me/351963404327?text=Dúvida: ${curProd.titulo} [${ref}]`;
   }
 
   function updateGallery() { document.getElementById('modalGallery').style.transform = `translateX(-${curImgIdx * 100}%)`; }
   function changeM(dir) { curImgIdx = (curImgIdx + dir + curProd.fotos.length) % curProd.fotos.length; updateGallery(); }
   function closeModal() { document.getElementById('productModal').style.display = 'none'; document.body.style.overflow = 'auto'; }
 
-  // Carrinho
   function adicionarAoCarrinho() {
-    carrinho.push({
-      titulo: document.getElementById('m-titulo').innerText,
-      preco: document.getElementById('m-preco').innerText,
-      ref: document.getElementById('m-ref').innerText
-    });
+    carrinho.push({ titulo: document.getElementById('m-titulo').innerText, preco: document.getElementById('m-preco').innerText, ref: document.getElementById('m-ref').innerText });
     localStorage.setItem('bloom_carrinho', JSON.stringify(carrinho));
     atualizarUI();
-    alert("Adicionado ao carrinho!");
+    alert("Adicionado!");
   }
 
   function atualizarUI() {
@@ -345,29 +306,21 @@
     lista.innerHTML = "";
     let total = 0;
     carrinho.forEach((item, i) => {
-      const pNum = parseFloat(item.preco.replace('€','').replace(',','.'));
-      total += isNaN(pNum) ? 0 : pNum;
-      lista.innerHTML += `<div style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid #eee;">
-        <span>${item.titulo}</span>
-        <span>${item.preco} <button onclick="removerItem(${i})" style="color:red; background:none; border:none; cursor:pointer;">X</button></span>
-      </div>`;
+      const p = parseFloat(item.preco.replace('€','').replace(',','.'));
+      total += isNaN(p) ? 0 : p;
+      lista.innerHTML += `<div style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid #eee;"><span>${item.titulo}</span><span>${item.preco} <button onclick="removerItem(${i})" style="color:red; background:none; border:none; cursor:pointer;">X</button></span></div>`;
     });
     document.getElementById('total-carrinho').innerText = total.toFixed(2).replace('.',',') + "€";
   }
 
-  function removerItem(i) {
-    carrinho.splice(i, 1);
-    localStorage.setItem('bloom_carrinho', JSON.stringify(carrinho));
-    atualizarUI();
-  }
+  function removerItem(i) { carrinho.splice(i, 1); localStorage.setItem('bloom_carrinho', JSON.stringify(carrinho)); atualizarUI(); }
 
   function finalizarCarrinhoEmail() {
-    if(carrinho.length === 0) return alert("O carrinho está vazio!");
-    let corpo = "Olá Bloom! Gostaria de encomendar:%0D%0A";
-    carrinho.forEach(i => corpo += `- ${i.titulo} (${i.preco})%0D%0A`);
-    window.location.href = `mailto:poly.bloom27@gmail.com?subject=Nova Encomenda&body=${corpo}`;
+    if(carrinho.length === 0) return alert("Vazio!");
+    let t = "Encomenda Bloom:%0D%0A";
+    carrinho.forEach(i => t += `- ${i.titulo} (${i.preco})%0D%0A`);
+    window.location.href = `mailto:poly.bloom27@gmail.com?subject=Encomenda&body=${t}`;
   }
-
   atualizarUI();
 </script>
 </body>
