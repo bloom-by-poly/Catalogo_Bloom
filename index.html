@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bloom by Poly | Catálogo Profissional</title>
   <style>
+    /* DEFINIÇÃO DE CORES HARMONIZADAS - ORIGINAIS */
     :root {
       --ouro: #b8926a;
       --bege-pagina: #fdfaf8;
@@ -20,6 +21,7 @@
       margin: 0;
     }
 
+    /* --- NAVEGAÇÃO --- */
     nav {
       background-color: var(--branco-header);
       padding: 15px 40px;
@@ -33,6 +35,7 @@
     }
 
     .nav-logo { max-height: 60px; cursor: pointer; }
+    
     .nav-links { display: flex; gap: 25px; align-items: center; }
     .nav-links a { 
         text-decoration: none; 
@@ -43,6 +46,7 @@
         letter-spacing: 1px;
         cursor: pointer;
     }
+    .nav-links a:hover { color: var(--ouro); }
     
     .btn-carrinho {
         background: var(--ouro);
@@ -51,9 +55,11 @@
         border-radius: 20px;
     }
 
+    /* --- SECÇÕES --- */
     .secao { display: none; padding-top: 20px; }
     .secao.ativa { display: block; }
 
+    /* --- PÁGINA INÍCIO --- */
     .hero-inicio { max-width: 900px; margin: 40px auto; text-align: center; padding: 0 20px; }
     .hero-inicio h1 { color: var(--ouro); font-weight: normal; }
     
@@ -70,47 +76,61 @@
     .preview-texto { width: 55%; }
     .preview-texto h3 { color: var(--ouro); font-size: 1.5rem; }
 
+    /* --- VITRINE --- */
     .catalogo { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; padding: 40px; max-width: 1200px; margin: 0 auto; }
     .card { background: #fcfcf2; border-radius: 25px; padding: 20px; text-align: center; cursor: pointer; transition: 0.4s; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-    .card img { width: 100%; height: 280px; object-fit: cover; border-radius: 20px; }
+    .card:hover { transform: translateY(-8px); box-shadow: 0 12px 30px rgba(184, 146, 106, 0.2); }
+    .card img { width: 100%; height: 280px; object-fit: cover; border-radius: 20px; background: #eee; }
     .card h3 { font-size: 1.2rem; margin: 20px 0 5px; font-weight: 400; }
     .card .preco-vitrine { color: var(--ouro); font-weight: bold; font-size: 1.1rem; }
 
+    /* --- MODAL --- */
     .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); overflow-y: auto; }
-    .modal-content { background: #fff; margin: 2% auto; width: 95%; max-width: 1100px; border-radius: 35px; display: flex; flex-wrap: nowrap; position: relative; overflow: hidden; max-height: 90vh; }
-    
-    .modal-left { flex: 1.2; background: #f4f4f4; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .modal-content { background: #fff; margin: 2% auto; width: 95%; max-width: 1100px; border-radius: 35px; display: flex; flex-wrap: nowrap; position: relative; overflow: hidden; animation: slideUp 0.4s ease; max-height: 90vh; }
+    @keyframes slideUp { from {transform: translateY(50px); opacity: 0;} to {transform: translateY(0); opacity: 1;} }
+
+    .close { position: absolute; right: 20px; top: 20px; font-size: 30px; cursor: pointer; z-index: 3000; color: #333; background: rgba(255,255,255,0.9); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+
+    .modal-left { flex: 1.2; background: #f4f4f4; position: relative; height: auto; min-height: 500px; overflow: hidden; }
     .modal-gallery { display: flex; width: 100%; height: 100%; transition: transform 0.5s ease; }
     
-    /* FIX: Imagem contida, proporcional e sem cortes */
-    .modal-gallery img { 
-        width: 100%; 
-        height: 100%; 
-        object-fit: contain; 
-        flex-shrink: 0; 
-    }
+    /* REVERSÃO: Imagem a cobrir todo o espaço (cover) como no original */
+    .modal-gallery img { width: 100%; min-width: 100%; height: 100%; object-fit: cover; flex-shrink: 0; background: #f4f4f4; }
 
-    .close { position: absolute; right: 20px; top: 20px; font-size: 30px; cursor: pointer; z-index: 3000; color: #333; background: rgba(255,255,255,0.9); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
-    .modal-nav { position: absolute; top: 50%; width: 100%; display: none; justify-content: space-between; padding: 0 15px; transform: translateY(-50%); z-index: 50; }
-    .m-btn { background: rgba(255,255,255,0.9); border: none; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; color: var(--ouro); box-shadow: 0 2px 10px rgba(0,0,0,0.2); }
+    .modal-nav { position: absolute; top: 50%; width: 100%; display: none; justify-content: space-between; padding: 0 15px; box-sizing: border-box; transform: translateY(-50%); z-index: 50; }
+    .m-btn { background: rgba(255,255,255,0.9); border: none; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; font-size: 20px; color: var(--ouro); box-shadow: 0 2px 10px rgba(0,0,0,0.2); }
 
     .modal-right { flex: 1; padding: 40px; display: flex; flex-direction: column; background: #fff; overflow-y: auto; }
-    .btn-add-carrinho { background: #dcbfa6; color: white; border: none; padding: 15px; border-radius: 30px; margin-bottom: 10px; cursor: pointer; font-weight: bold; }
-    .btn-wpp { background: var(--dark); color: #fff; text-decoration: none; padding: 18px; text-align: center; border-radius: 60px; font-weight: bold; }
-    .select-modal { width: 100%; padding: 12px; border-radius: 12px; border: 1.5px solid #eee; margin-bottom: 15px; }
+    .modal-right h2 { font-size: 1.8rem; margin: 0 0 15px; color: var(--dark); }
+    .modal-right p { font-size: 1rem; color: #666; margin-bottom: 10px; line-height: 1.5; }
+    .modal-right .m-nota { font-size: 0.85rem; color: #888; font-style: italic; margin-bottom: 20px; display: block; border-left: 2px solid var(--ouro); padding-left: 10px; }
+    .ref-tag { font-size: 0.75rem; background: #f0f0f0; padding: 5px 10px; border-radius: 6px; color: #555; display: inline-block; margin-bottom: 20px; font-weight: bold; align-self: flex-start; }
 
+    .select-modal { width: 100%; padding: 12px; border-radius: 12px; border: 1.5px solid #eee; margin-bottom: 15px; font-family: inherit; font-size: 0.95rem; cursor: pointer; }
+    .btn-add-carrinho { background: #dcbfa6; color: white; border: none; padding: 15px; border-radius: 30px; margin-bottom: 10px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+    .btn-wpp { background: var(--dark); color: #fff; text-decoration: none; padding: 18px; text-align: center; border-radius: 60px; font-weight: bold; transition: 0.3s; font-size: 0.95rem; }
+
+    /* --- FORMULÁRIO DE CONTACTO --- */
     .form-contacto { max-width: 600px; margin: 40px auto; padding: 30px; background: #fff; border-radius: 20px; border: 1px solid #eee; text-align: center; }
     .form-contacto h4 { color: var(--ouro); text-transform: uppercase; margin-bottom: 20px; }
+    .form-group { margin-bottom: 15px; text-align: left; }
+    .form-group label { display: block; font-size: 0.8rem; font-weight: bold; color: var(--ouro); margin-bottom: 5px; }
+    .form-group input, .form-group textarea { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 10px; font-family: inherit; box-sizing: border-box; }
     .btn-enviar-form { width: 100%; background: var(--ouro); color: white; border: none; padding: 15px; border-radius: 30px; font-weight: bold; cursor: pointer; }
 
-    footer { text-align: center; padding: 60px 20px; background: #fff; border-top: 1px solid #eee; display: flex; justify-content: space-around; flex-wrap: wrap; }
+    footer { text-align: center; padding: 60px 20px; background: #fff; border-top: 1px solid #eee; margin-top: 60px; display: flex; justify-content: space-around; flex-wrap: wrap; }
     .footer-col { min-width: 250px; margin-bottom: 30px; }
+    .footer-col h4 { color: var(--ouro); text-transform: uppercase; margin-bottom: 15px; }
 
     @media (max-width: 850px) {
-      .modal-content { flex-direction: column; width: 100%; height: 100%; max-height: 100vh; margin: 0; border-radius: 0; }
-      .modal-left { height: 45vh; flex: none; }
-      .modal-right { padding: 25px; flex: 1; }
+      nav { padding: 10px 15px; }
+      .nav-links { gap: 10px; }
       .nav-links a { font-size: 0.7rem; }
+      .modal-content { flex-direction: column; margin: 0; border-radius: 0; width: 100%; height: 100%; max-height: 100vh; overflow-y: auto; }
+      .modal-left { flex: none; height: 45vh; min-height: 300px; width: 100%; }
+      .modal-right { padding: 25px 20px; flex: 1; overflow-y: auto; }
+      .preview-item { flex-direction: column !important; text-align: center; }
+      .preview-img, .preview-texto { width: 100%; }
     }
   </style>
 </head>
@@ -129,22 +149,40 @@
 <section id="inicio" class="secao ativa">
   <div class="hero-inicio">
     <h1>Bem-vinda à Bloom by Poly</h1>
-    <p>A Bloom nasceu do fascínio pelo poder transformador das velas artesanais e objetos de design.</p>
+    <p>A Bloom nasceu do fascínio pelo poder transformador das velas. O que começou como um gosto pessoal pela luz e pelo aroma, evoluiu para uma marca onde cada peça é criada artesanalmente para ser mais do que uma vela: é um objeto de design que eleva a estética do seu lar.</p>
   </div>
   <div class="preview-produtos">
     <div class="preview-item">
       <img src="Fotos/9_JarraPers_II.jpg" class="preview-img">
-      <div class="preview-texto"><h3>Jarras Personalizadas</h3><p>Peças exclusivas de design assinado.</p></div>
+      <div class="preview-texto">
+        <h3>Jarras Personalizadas</h3>
+        <p>Um encontro entre a nossa arte floral e o design assinado. Peças exclusivas que trazem sofisticação imediata a qualquer mesa ou aparador.</p>
+      </div>
     </div>
     <div class="preview-item">
-      <div class="preview-texto"><h3>Miniaturas</h3><p>Pequenos detalhes, grandes impactos.</p></div>
+      <div class="preview-texto">
+        <h3>Miniaturas</h3>
+        <p>A prova de que os pequenos detalhes criam os maiores impactos. Versões mini pensadas para cantos de leitura e momentos de pausa.</p>
+      </div>
       <img src="Fotos/12_MiniaturaCesto.jpg" class="preview-img">
+    </div>
+    <div class="preview-item">
+      <img src="Fotos/7_VelasInd.jpg" class="preview-img">
+      <div class="preview-texto">
+        <h3>Velas Individuais</h3>
+        <p>Esculturas de cera puras e elegantes. A essência da Bloom em formas que desafiam o comum e convidam à contemplação.</p>
+      </div>
     </div>
   </div>
 </section>
 
 <section id="produtos" class="secao">
   <main class="catalogo" id="vitrine"></main>
+  <section class="nota-geral" style="max-width:800px; margin: 40px auto; text-align:center; padding:30px; background:#fff; border-radius:20px; border:1px solid #eee;">
+    <h4 style="color:var(--ouro); text-transform:uppercase;">Notas importantes antes de encomendar:</h4>
+    <p>Poderá escolher, para todos os produtos, a combinação de cores e essências, limitado ao stock existente.</p>
+    <p>Aos valores apresentados, acresce o custo dos portes de envio.</p>
+  </section>
 </section>
 
 <section id="sobre" class="secao">
@@ -168,8 +206,8 @@
 <section class="form-contacto">
   <h4>Dúvidas Gerais?</h4>
   <form action="mailto:poly.bloom27@gmail.com" method="GET" enctype="text/plain">
-    <div style="margin-bottom:15px; text-align:left;"><label style="font-size:0.8rem; font-weight:bold; color:var(--ouro);">NOME</label><input type="text" name="subject" style="width:100%; padding:12px; border-radius:10px; border:1px solid #ddd;" required></div>
-    <div style="margin-bottom:15px; text-align:left;"><label style="font-size:0.8rem; font-weight:bold; color:var(--ouro);">DESCRIÇÃO</label><textarea name="body" rows="4" style="width:100%; padding:12px; border-radius:10px; border:1px solid #ddd;" required></textarea></div>
+    <div class="form-group"><label>NOME</label><input type="text" name="subject" required></div>
+    <div class="form-group"><label>DESCRIÇÃO</label><textarea name="body" rows="4" required></textarea></div>
     <button type="submit" class="btn-enviar-form">ENVIAR MENSAGEM</button>
   </form>
 </section>
@@ -187,19 +225,19 @@
     <div class="modal-right">
       <h2 id="m-titulo"></h2>
       <p id="m-desc"></p>
-      <span id="m-nota" style="font-size:0.85rem; color:#888; font-style:italic; margin-bottom:20px; border-left:2px solid var(--ouro); padding-left:10px;"></span>
+      <span id="m-nota" class="m-nota"></span>
       <div id="m-opcoes-cont">
-        <label style="font-size: 0.75rem; font-weight: bold; color: var(--ouro);">OPÇÃO:</label>
+        <label style="font-size: 0.75rem; font-weight: bold; color: var(--ouro); display: block; margin-bottom: 5px;">OPÇÃO:</label>
         <select id="m-select" class="select-modal" onchange="syncModal()"></select>
       </div>
       <div id="m-sub-opcoes-cont" style="display: none;">
-        <label id="m-sub-label" style="font-size: 0.75rem; font-weight: bold; color: var(--ouro);"></label>
+        <label id="m-sub-label" style="font-size: 0.75rem; font-weight: bold; color: var(--ouro); display: block; margin-bottom: 5px; text-transform: uppercase;"></label>
         <select id="m-sub-select" class="select-modal" onchange="syncModal()"></select>
       </div>
-      <div id="m-ref" style="font-size: 0.8rem; font-weight: bold; margin-bottom: 15px; background:#f0f0f0; padding:5px; border-radius:5px;"></div>
+      <div id="m-ref" class="ref-tag"></div>
       <div id="m-preco" style="font-size: 1.6rem; color: var(--ouro); margin-bottom: 20px; font-weight: bold;"></div>
       <button onclick="adicionarAoCarrinho()" class="btn-add-carrinho">ADICIONAR AO CARRINHO</button>
-      <a id="m-link" href="#" target="_blank" class="btn-wpp">WHATSAPP</a>
+      <a id="m-link" href="#" target="_blank" class="btn-wpp">ENCOMENDAR VIA WHATSAPP</a>
     </div>
   </div>
 </div>
@@ -208,39 +246,45 @@
   <div class="footer-col">
     <h4>Onde nos encontrar</h4>
     <p><a href="https://www.instagram.com/poly.bloom27" target="_blank" style="text-decoration:none; color:inherit;">Instagram</a></p>
-    <p><a href="https://www.facebook.com/share/1DKkx39AAQ/?mibextid=wwXIfr" target="_blank" style="text-decoration:none; color:inherit;">Bloom by Poly</a></p>
+    <p><a href="https://www.facebook.com/share/1DKkx39AAQ/?mibextid=wwXIfr" target="_blank" style="text-decoration:none; color:inherit;">Bloom by Poly (Facebook)</a></p>
   </div>
   <div class="footer-col">
     <h4>Contactos</h4>
     <p>Email: poly.bloom27@gmail.com</p>
+    <p><a href="https://wa.me/351963404327" style="text-decoration:none; color:inherit;">WhatsApp</a></p>
   </div>
 </footer>
 
 <script>
+  const notaGeralVelas = "NOTA: Para queimar, deve retirar as velas e colocar em recipiente próprio.";
   let carrinho = JSON.parse(localStorage.getItem('bloom_carrinho')) || [];
+
   const produtos = [
-    { id: 0, titulo: "Bouquet em caixa de Madeira", preco: "15,50€", ref: "BOUQ-MAD-01", desc: "Uma curadoria onde o charme rústico da madeira natural se funde com a elegância do design contemporâneo...", nota: "NOTA: Para queimar, deve retirar as velas e colocar em recipiente próprio.", fotos: ["Fotos/1_CaixaMadeira.jpg"], opcoes: [] },
-    { id: 1, titulo: "Bouquet em Caixa de Cartão", preco: "A partir de 14,50€", ref: "BOUQ-CART-MED", desc: "Uma composição onde o design contemporâneo das linhas modernas encontra a delicadeza da nossa arte floral...", nota: "NOTA: Para queimar, deve retirar as velas e colocar em recipiente próprio.", fotos: ["Fotos/2_CaixaCartao.jpg", "Fotos/10_CaixaCartaoCorrente.jpg", "Fotos/13_CaixaCartaoPeq.jpg"], opcoes: [
-        { nome: "Médio", ref: "BOUQ-CART-MED", preco: "19,90€", subTitulo: "Tipo de caixa", subOpcoes: [
+    { id: 0, titulo: "Bouquet em caixa de Madeira", preco: "15,50€", ref: "BOUQ-MAD-01", desc: "Uma curadoria onde o charme rústico da madeira natural se funde com a elegância do design contemporâneo. Esta peça artesanal foi concebida para transformar espaços, criando momentos de serenidade através de detalhes decorativos exclusivos.", nota: notaGeralVelas, fotos: ["Fotos/1_CaixaMadeira.jpg"], opcoes: [] },
+    { id: 1, titulo: "Bouquet em Caixa de Cartão", preco: "A partir de 14,50€", ref: "BOUQ-CART-MED", desc: "Uma composição onde o design contemporâneo das linhas modernas encontra a delicadeza da nossa arte floral. Estruturado em cartão de acabamento superior, este bouquet equilibra suavidade e distinção numa peça decorativa única.", nota: notaGeralVelas, fotos: ["Fotos/2_CaixaCartao.jpg", "Fotos/10_CaixaCartaoCorrente.jpg", "Fotos/13_CaixaCartaoPeq.jpg"], opcoes: [
+        { nome: "Selecionar", ref: "", preco: "14,50€ - 19,90€", fotoIdx: 0 },
+        { nome: "Médio", ref: "BOUQ-CART-MED", preco: "19,90€", subTitulo: "Tipo de caixa pretendido", subOpcoes: [
             { nome: "Caixa redonda", ref: "BOUQ-CART-RED", preco: "19,90€", fotoIdx: 0 },
             { nome: "Caixa retangular com correntes douradas", ref: "BOUQ-CART-COR", preco: "19,90€", fotoIdx: 1 }
           ]},
-        { nome: "Pequeno", ref: "BOUQ-CART-PEQ", preco: "14,50€", subTitulo: "Cor", subOpcoes: [
+        { nome: "Pequeno", ref: "BOUQ-CART-PEQ", preco: "14,50€", subTitulo: "Cor pretendida", subOpcoes: [
             { nome: "Cor de rosa", ref: "BOUQ-CART-PEQ-PK", preco: "14,50€", fotoIdx: 2 },
             { nome: "Branco", ref: "BOUQ-CART-PEQ-WT", preco: "14,50€", fotoIdx: 2 }
           ]}
       ]},
-    { id: 2, titulo: "Bouquet em Jarra", preco: "A partir de 7,00€", ref: "BOUQ-JAR-NORM", desc: "Elegância e delicadeza em jarra de vidro. Descubra as jarras personalizadas...", nota: "NOTA: Para queimar, deve retirar as velas e colocar em recipiente próprio.", fotos: ["Fotos/3_ArranjoJarra.jpg", "Fotos/9_JarraPers_II.jpg", "Fotos/8_JarraPersonalizada.jpg"], opcoes: [
+    { id: 2, titulo: "Bouquet em Jarra", preco: "A partir de 7,00€", ref: "BOUQ-JAR-NORM", desc: "Elegância e delicadeza em jarra de vidro. Descubra as jarras personalizadas, um encontro entre duas artes: as nossas velas artesanais ganham uma nova dimensão em jarras exclusivas de design assinado por Luís Chaves, disponíveis para compra com o seu bouquet.", nota: notaGeralVelas, fotos: ["Fotos/3_ArranjoJarra.jpg", "Fotos/9_JarraPers_II.jpg", "Fotos/8_JarraPersonalizada.jpg"], opcoes: [
+        { nome: "Selecionar", ref: "", preco: "7,00€ - 15,00€", fotoIdx: 0 },
         { nome: "Normal", ref: "BOUQ-JAR-NORM", preco: "7,00€", fotoIdx: 0 },
         { nome: "Personalizada", ref: "BOUQ-JAR-PERS", preco: "15,00€", fotoIdx: 1 }
       ]},
-    { id: 3, titulo: "Bouquet Miniatura", preco: "4,50€", ref: "MINI-VASO-MET", desc: "A prova de que a elegância prescinde de grandes dimensões...", nota: "NOTA: Para queimar, deve retirar as velas e colocar em recipiente próprio.", fotos: ["Fotos/4_MiniVasosMetal.jpg", "Fotos/12_MiniaturaCesto.jpg", "Fotos/11_Miniaturas.jpg"], opcoes: [
+    { id: 3, titulo: "Bouquet Miniatura", preco: "4,50€", ref: "MINI-VASO-MET", desc: "A prova de que a elegância prescinde de grandes dimensões para criar impacto. Uma curadoria de pormenores pensada para conferir pontos de luz e harmonia a espaços mais íntimos.", nota: notaGeralVelas, fotos: ["Fotos/4_MiniVasosMetal.jpg", "Fotos/12_MiniaturaCesto.jpg", "Fotos/11_Miniaturas.jpg"], opcoes: [
+        { nome: "Selecionar", ref: "", preco: "4,50€", fotoIdx: 0 },
         { nome: "Vaso Metálico", ref: "MINI-VASO-MET", preco: "4,50€", fotoIdx: 0 },
         { nome: "Cesto Artesanal", ref: "MINI-CESTO-ART", preco: "4,50€", fotoIdx: 1 }
       ]},
-    { id: 4, titulo: "Vela em Taça Cerâmica", preco: "9,90€", ref: "VELA-TACA-CER", desc: "Onde o calor da cera encontra a alma da terra...", nota: "NOTA: Para queimar, deverá retirar as flores secas.", fotos: ["Fotos/5_TacaCeramica.jpg"], opcoes: [] },
-    { id: 5, titulo: "Ramos de Flores", preco: "6,50€", ref: "RAMO-FLOR-IND", desc: "Pequenas esculturas de luz floral.", nota: "NOTA: Para queimar, deve retirar as velas e colocar em recipiente próprio.", fotos: ["Fotos/6_FloresRamo.jpg"], opcoes: [] },
-    { id: 6, titulo: "Velas Individuais", preco: "4,50€", ref: "VELA-IND-PERS", desc: "A essência da Bloom em formas que desafiam o comum.", nota: "NOTA: Para queimar, deve retirar as velas e colocar em recipiente próprio.", fotos: ["Fotos/14_VelasInd_II.jpg", "Fotos/7_VelasInd.jpg"], opcoes: [] }
+    { id: 4, titulo: "Vela em Taça Cerâmica", preco: "9,90€", ref: "VELA-TACA-CER", desc: "Onde o calor da cera encontra a alma da terra numa fusão perfeita. Um convite à serenidade que traz uma estética orgânica e sofisticada a qualquer espaço da sua casa.", nota: "NOTA: Para queimar, deverá retirar as flores secas, podendo acender a vela no mesmo recipiente.", fotos: ["Fotos/5_TacaCeramica.jpg"], opcoes: [] },
+    { id: 5, titulo: "Ramos de Flores", preco: "6,50€", ref: "RAMO-FLOR-IND", desc: "Pequenas esculturas de luz que elevam a delicadeza floral a um novo patamar. Este ramo de três flores é o detalhe perfeito para pontuar a sua decoração ou para um gesto de carinho inesquecível.", nota: notaGeralVelas, fotos: ["Fotos/6_FloresRamo.jpg"], opcoes: [] },
+    { id: 6, titulo: "Velas Individuais", preco: "4,50€", ref: "VELA-IND-PERS", desc: "A essência da Bloom capturada numa peça de design artesanal que combina a pureza das formas com a delicadeza floral. Um detalhe de luz e sofisticação, ideal tanto para elevar a sua decoração como para um gesto de partilha único.", nota: notaGeralVelas, fotos: ["Fotos/14_VelasInd_II.jpg", "Fotos/7_VelasInd.jpg"], opcoes: [] }
   ];
 
   function trocarPagina(id) {
@@ -266,7 +310,6 @@
     const gal = document.getElementById('modalGallery');
     gal.innerHTML = curProd.fotos.map(f => `<img src="${f}">`).join('');
     
-    // Mostra/Esconde setas de navegação
     document.getElementById('nav-buttons').style.display = curProd.fotos.length > 1 ? 'flex' : 'none';
 
     const sel = document.getElementById('m-select');
@@ -283,7 +326,7 @@
     const sel = document.getElementById('m-select');
     const subSel = document.getElementById('m-sub-select');
     const subCont = document.getElementById('m-sub-opcoes-cont');
-    let ref = curProd.ref; let preco = curProd.preco;
+    let ref = curProd.ref; let preco = curProd.preco; let nome = curProd.titulo;
 
     if(curProd.opcoes.length > 0) {
       const opt = curProd.opcoes[sel.value] || curProd.opcoes[0];
@@ -295,7 +338,7 @@
           subSel.dataset.p = sel.value;
         }
         const subOpt = opt.subOpcoes[subSel.value] || opt.subOpcoes[0];
-        ref = subOpt.ref; preco = subOpt.preco; curImgIdx = subOpt.fotoIdx;
+        ref = subOpt.ref; preco = subOpt.preco; nome += ` - ${opt.nome} (${subOpt.nome})`; curImgIdx = subOpt.fotoIdx;
       } else {
         subCont.style.display = 'none';
         ref = opt.ref; preco = opt.preco; curImgIdx = opt.fotoIdx || 0;
@@ -304,7 +347,7 @@
     document.getElementById('m-preco').innerText = preco;
     document.getElementById('m-ref').innerText = `Ref: ${ref}`;
     updateGallery();
-    document.getElementById('m-link').href = `https://wa.me/351963404327?text=Encomenda: ${curProd.titulo} [${ref}]`;
+    document.getElementById('m-link').href = `https://wa.me/351963404327?text=Gostaria de saber mais sobre: ${nome} [Ref: ${ref}]`;
   }
 
   function updateGallery() { document.getElementById('modalGallery').style.transform = `translateX(-${curImgIdx * 100}%)`; }
@@ -315,7 +358,7 @@
     carrinho.push({ titulo: document.getElementById('m-titulo').innerText, preco: document.getElementById('m-preco').innerText, ref: document.getElementById('m-ref').innerText });
     localStorage.setItem('bloom_carrinho', JSON.stringify(carrinho));
     atualizarUI();
-    alert("Produto adicionado!");
+    alert("Produto adicionado ao carrinho!");
   }
 
   function atualizarUI() {
@@ -324,9 +367,9 @@
     lista.innerHTML = "";
     let total = 0;
     carrinho.forEach((item, i) => {
-        const p = parseFloat(item.preco.replace('€','').replace(',','.'));
-        total += isNaN(p) ? 0 : p;
-        lista.innerHTML += `<div style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid #eee;"><span>${item.titulo} (${item.ref})</span><span>${item.preco} <button onclick="removerItem(${i})" style="color:red; background:none; border:none; cursor:pointer;">X</button></span></div>`;
+        const pNum = parseFloat(item.preco.replace('€','').replace(',','.'));
+        total += isNaN(pNum) ? 0 : pNum;
+        lista.innerHTML += `<div style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid #eee;"><span>${item.titulo} (${item.ref})</span><span>${item.preco} <button class="btn-remover" onclick="removerItem(${i})">Remover</button></span></div>`;
     });
     document.getElementById('total-carrinho').innerText = total.toFixed(2).replace('.',',') + "€";
   }
@@ -334,10 +377,11 @@
   function removerItem(i) { carrinho.splice(i, 1); localStorage.setItem('bloom_carrinho', JSON.stringify(carrinho)); atualizarUI(); }
 
   function finalizarCarrinhoEmail() {
-    if(carrinho.length === 0) return alert("Vazio!");
-    let t = "Encomenda Bloom:%0D%0A";
-    carrinho.forEach(i => t += `- ${i.titulo} (${i.preco})%0D%0A`);
-    window.location.href = `mailto:poly.bloom27@gmail.com?subject=Encomenda&body=${t}`;
+    if(carrinho.length === 0) return alert("Carrinho vazio!");
+    let t = "Olá Bloom! Gostaria de encomendar:%0D%0A";
+    carrinho.forEach(i => t += `- ${i.titulo} [${i.ref}] (${i.preco})%0D%0A`);
+    t += `%0D%0ATotal: ${document.getElementById('total-carrinho').innerText}`;
+    window.location.href = `mailto:poly.bloom27@gmail.com?subject=Encomenda Bloom&body=${t}`;
   }
   atualizarUI();
 </script>
