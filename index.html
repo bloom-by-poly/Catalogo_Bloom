@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bloom by Poly | Site</title>
   <style>
-    /* DEFINIÇÃO DE CORES HARMONIZADAS - ORIGINAIS */
     :root {
       --ouro: #b8926a;
       --bege-pagina: #fdfaf8;
@@ -21,7 +20,6 @@
       margin: 0;
     }
 
-    /* --- NAVEGAÇÃO --- */
     nav {
       background-color: var(--branco-header);
       padding: 15px 40px;
@@ -59,7 +57,6 @@
     .secao { display: none; padding-top: 20px; }
     .secao.ativa { display: block; }
 
-    /* --- PÁGINA INÍCIO --- */
     .hero-inicio { max-width: 900px; margin: 40px auto; text-align: center; padding: 0 20px; }
     .hero-inicio h1 { color: var(--ouro); font-weight: normal; }
 
@@ -76,7 +73,6 @@
     .preview-texto { width: 55%; }
     .preview-texto h3 { color: var(--ouro); font-size: 1.5rem; }
 
-    /* --- VITRINE --- */
     .catalogo { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; padding: 40px; max-width: 1200px; margin: 0 auto; }
     .card { background: #fcfcf2; border-radius: 25px; padding: 20px; text-align: center; cursor: pointer; transition: 0.4s; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
     .card:hover { transform: translateY(-8px); box-shadow: 0 12px 30px rgba(184, 146, 106, 0.2); }
@@ -84,7 +80,6 @@
     .card h3 { font-size: 1.2rem; margin: 20px 0 5px; font-weight: 400; }
     .card .preco-vitrine { color: var(--ouro); font-weight: bold; font-size: 1.1rem; }
 
-    /* --- MODAL --- */
     .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); overflow-y: auto; }
     .modal-content { background: #fff; margin: 2% auto; width: 95%; max-width: 1100px; border-radius: 35px; display: flex; flex-wrap: nowrap; position: relative; overflow: hidden; animation: slideUp 0.4s ease; max-height: 90vh; }
     @keyframes slideUp { from {transform: translateY(50px); opacity: 0;} to {transform: translateY(0); opacity: 1;} }
@@ -108,13 +103,11 @@
     .select-modal { width: 100%; padding: 12px; border-radius: 12px; border: 1.5px solid #eee; margin-bottom: 15px; font-family: inherit; font-size: 0.95rem; cursor: pointer; }
     .btn-add-carrinho { background: #dcbfa6; color: white; border: none; padding: 15px; border-radius: 30px; margin-bottom: 10px; cursor: pointer; font-weight: bold; transition: 0.3s; }
 
-    /* --- CARRINHO --- */
     .carrinho-container { max-width: 800px; margin: 40px auto; background: white; padding: 40px; border-radius: 25px; border: 1px solid #eee; }
     .item-carrinho { display: flex; justify-content: space-between; border-bottom: 1px solid #eee; padding: 15px 0; }
     .btn-remover { color: red; cursor: pointer; background: none; border: none; font-size: 0.8rem; }
     .btn-wpp { background: var(--dark); color: #fff; text-decoration: none; padding: 18px; text-align: center; border-radius: 60px; font-weight: bold; transition: 0.3s; font-size: 0.95rem; }
 
-    /* --- FORMULÁRIO DE CONTACTO (Rodapé) --- */
     .form-group { margin-bottom: 15px; text-align: left; }
     .form-group label { display: block; font-size: 0.8rem; font-weight: bold; color: var(--ouro); margin-bottom: 5px; text-transform: none; }
     .form-group input, .form-group textarea { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 10px; font-family: inherit; box-sizing: border-box; }
@@ -232,25 +225,16 @@
         <label style="font-size: 0.75rem; font-weight: bold; color: var(--ouro); display: block; margin-bottom: 5px;">COR:</label>
         <select id="m-cor" class="select-modal">
           <option value="" disabled selected>Selecione uma cor</option>
-          <option value="Branco">Branco</option>
           <optgroup label="Tons quentes e Avermelhados">
-            <option value="Burgundy">Burgundy</option>
-            <option value="Plum">Plum</option>
-            <option value="Rosa">Rosa</option>
+        
           </optgroup>
           <optgroup label="Tons Terrosos e Neutros">
-            <option value="Café">Café</option>
-            <option value="Castanho">Castanho</option>
+            
           </optgroup>
           <optgroup label="Tons cítricos e Vibrantes">
-            <option value="Amarelo">Amarelo</option>
-            <option value="Laranja">Laranja</option>
+            
           </optgroup>
           <optgroup label="Tons frios">
-            <option value="Azul Safira">Azul Safira</option>
-            <option value="Azul Celeste">Azul Celeste</option>
-            <option value="Roxo">Roxo</option>
-            <option value="Verde">Verde</option>
           </optgroup>
         </select>
       </div>
@@ -260,14 +244,9 @@
         <select id="m-essencia" class="select-modal">
           <option value="" disabled selected>Selecione uma essência</option>
           <optgroup label="Cítricos">
-            <option value="Lime Basil & Mandarin">Lime Basil & Mandarin</option>
-            <option value="Laranja">Laranja</option>
+
           </optgroup>
           <optgroup label="Floral">
-            <option value="Sakura">Sakura</option>
-            <option value="Magnólia Japonesa">Magnólia Japonesa</option>
-            <option value="Jasmim">Jasmim</option>
-            <option value="Lavanda">Lavanda</option>
           </optgroup>
           <optgroup label="Oriental/Amadeirado">
             <option value="Âmbar e Sândalo">Âmbar e Sândalo</option>
@@ -317,7 +296,7 @@
   let carrinho = JSON.parse(localStorage.getItem('bloom_carrinho')) || [];
 
   const produtos = [
-    { id: 0, titulo: "Bouquet em caixa de Madeira", preco: "15,50€", ref: "BOUQ-MAD-01", desc: "Uma curadoria onde o charme rústico da madeira natural se funde com a elegância do design contemporâneo. Esta peça artesanal foi concebida para transformar espaços, criando momentos de serenidade através de detalhes decorativos exclusivos.", nota: notaGeralVelas, fotos: ["Fotos/1_CaixaMadeira.jpg"], opcoes: [] },
+    { id: 0, titulo: "Bouquet em caixa de Madeira", preco: "16,50€", ref: "BOUQ-MAD-01", desc: "Uma curadoria onde o charme rústico da madeira natural se funde com a elegância do design contemporâneo. Esta peça artesanal foi concebida para transformar espaços, criando momentos de serenidade através de detalhes decorativos exclusivos.", nota: notaGeralVelas, fotos: ["Fotos/1_CaixaMadeira.jpg"], opcoes: [] },
     { id: 1, titulo: "Bouquet em Caixa de Cartão", preco: "A partir de 14,50€", ref: "BOUQ-CART-MED", desc: "Uma composição onde o design contemporâneo das linhas modernas encontra a delicadeza da nossa arte floral. Estruturado em cartão de acabamento superior, este bouquet equilibra suavidade e distinção numa peça decorativa única.", nota: notaGeralVelas, fotos: ["Fotos/2_CaixaCartao.jpg", "Fotos/10_CaixaCartaoCorrente.jpg", "Fotos/13_CaixaCartaoPeq.jpg"], opcoes: [
         { nome: "Selecionar", ref: "", preco: "14,50€ - 19,90€", fotoIdx: 0 },
         { nome: "Médio", ref: "BOUQ-CART-MED", preco: "19,90€", subTitulo: "Tipo de caixa pretendido", subOpcoes: [
@@ -325,8 +304,8 @@
             { nome: "Caixa retangular com correntes douradas", ref: "BOUQ-CART-COR", preco: "19,90€", fotoIdx: 1 }
           ]},
         { nome: "Pequeno", ref: "BOUQ-CART-PEQ", preco: "14,50€", subTitulo: "Cor pretendida", subOpcoes: [
-            { nome: "Cor de rosa", ref: "BOUQ-CART-PEQ-PK", preco: "14,50€", fotoIdx: 2 },
-            { nome: "Branco", ref: "BOUQ-CART-PEQ-WT", preco: "14,50€", fotoIdx: 2 }
+            { nome: "Cor de rosa", ref: "BOUQ-CART-PEQ-PK", preco: "15,90€", fotoIdx: 2 },
+            { nome: "Branco", ref: "BOUQ-CART-PEQ-WT", preco: "15,90€", fotoIdx: 2 }
           ]}
       ]},
     { id: 2, titulo: "Bouquet em Jarra", preco: "A partir de 7,00€", ref: "BOUQ-JAR-NORM", desc: "Elegância e delicadeza em jarra de vidro. Descubra as jarras personalizadas, um encontro entre duas artes: as nossas velas artesanais ganham uma nova dimensão em jarras exclusivas de design assinado por Luís Chaves, disponíveis para compra com o seu bouquet.", nota: notaGeralVelas, fotos: ["Fotos/3_ArranjoJarra.jpg", "Fotos/9_JarraPers_II.jpg", "Fotos/8_JarraPersonalizada.jpg"], opcoes: [
